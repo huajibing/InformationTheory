@@ -1,4 +1,4 @@
-# 信息论第13讲：信道编码定理（逆定理），Fano不等式的应用，Fisher信息与Cramer-Rao不等式
+# 第13节：信道编码定理（逆定理），Fano不等式的应用，Fisher信息与Cramer-Rao不等式
 
 ---
 
