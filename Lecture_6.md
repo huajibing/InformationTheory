@@ -15,36 +15,51 @@
 ### 一、微分熵 (Differential Entropy)
 
 1.  **回顾与定义**
-    *   对于一个连续随机变量 $X$，其概率密度函数 (Probability Density Function, PDF) 为 $f(x)$。
-    *   微分熵 (Differential Entropy)，通常记为 $h(X)$，定义为：
-        $$h(X) = -\int_{-\infty}^{\infty} f(x) \log f(x) dx$$
-        通常简写为 $h(X) = -\int f(x) \log f(x) dx$。
-    *   对数的底通常为2，单位是**比特 (bits)**。如果使用自然对数 $e$，单位是**奈特 (nats)**。
-    *   讲师强调，这一定义是离散熵定义 $H(X) = -\sum P(x) \log P(x)$ 的一个*纯形式上 (purely formal)*的推广。
+    *   对于一个连续随机变量 $$X$$，其概率密度函数 (Probability Density Function, PDF) 为 $$f(x)$$。
+    *   微分熵 (Differential Entropy)，通常记为 $$h(X)$$，定义为：
+$$
+h(X) = -\int_{-\infty}^{\infty} f(x) \log f(x) dx
+$$
+        通常简写为 $$h(X) = -\int f(x) \log f(x) dx$$。
+    *   对数的底通常为2，单位是**比特 (bits)**。如果使用自然对数 $$e$$，单位是**奈特 (nats)**。
+    *   讲师强调，这一定义是离散熵定义 $$H(X) = -\sum P(x) \log P(x)$$ 的一个*纯形式上 (purely formal)*的推广。
 
 2.  **与离散熵的关系**
-    *   考虑将连续随机变量 $X$ 的值域分割成宽度为 $\Delta$ 的小区间 (bins)，从而将其离散化。令 $X_{\Delta}$ 为离散化后的随机变量。在第 $i$ 个区间 $[x_i, x_i+\Delta)$ 内，$P(X \in [x_i, x_i+\Delta)) \approx f(x_i)\Delta$。
-    *   离散熵 $H(X_{\Delta})$ 的计算：
-        $$H(X_{\Delta}) = -\sum_i P(X_{\Delta}=x_i) \log P(X_{\Delta}=x_i)$$
-        $$\approx -\sum_i (f(x_i)\Delta) \log (f(x_i)\Delta)$$
-        $$= -\sum_i f(x_i)\Delta (\log f(x_i) + \log \Delta)$$
-        $$= -\sum_i (f(x_i) \log f(x_i))\Delta - \log \Delta \sum_i f(x_i)\Delta$$
-    *   当 $\Delta \to 0$ 时：
-        *   第一项：$\sum_i (f(x_i) \log f(x_i))\Delta \to \int f(x) \log f(x) dx = -h(X)$。
-        *   第二项：$\sum_i f(x_i)\Delta \to \int f(x) dx = 1$ (因为 $f(x)$ 是PDF)。
-    *   因此，当 $\Delta \to 0$ 时，离散熵 $H(X_{\Delta})$ 与微分熵 $h(X)$ 的关系近似为：
-        $$H(X_{\Delta}) \approx h(X) - \log \Delta = h(X) + \log \frac{1}{\Delta}$$
-    *   更精确地，微分熵可以被视为（讲师板书为 $\hat{h}(X)$，但通常用 $h(X)$ 表示）：
-        $$h(X) = \lim_{\Delta \to 0} \left[ H(X_{\Delta}) - \log \frac{1}{\Delta} \right]$$
-
+    *   考虑将连续随机变量 $$X$$ 的值域分割成宽度为 $$\Delta$$ 的小区间 (bins)，从而将其离散化。令 $$X_{\Delta}$$ 为离散化后的随机变量。在第 $$i$$ 个区间 $$[x_i, x_i+\Delta)$$ 内，$$P(X \in [x_i, x_i+\Delta)) \approx f(x_i)\Delta$$。
+    *   离散熵 $$H(X_{\Delta})$$ 的计算：
+$$
+H(X_{\Delta}) = -\sum_i P(X_{\Delta}=x_i) \log P(X_{\Delta}=x_i)
+$$
+$$
+\approx -\sum_i (f(x_i)\Delta) \log (f(x_i)\Delta)
+$$
+$$
+= -\sum_i f(x_i)\Delta (\log f(x_i) + \log \Delta)
+$$
+$$
+= -\sum_i (f(x_i) \log f(x_i))\Delta - \log \Delta \sum_i f(x_i)\Delta
+$$
+    *   当 $$\Delta \to 0$$ 时：
+        *   第一项：$$\sum_i (f(x_i) \log f(x_i))\Delta \to \int f(x) \log f(x) dx = -h(X)$$。
+        *   第二项：$$\sum_i f(x_i)\Delta \to \int f(x) dx = 1$$ (因为 $$f(x)$$ 是PDF)。
+    *   因此，当 $$\Delta \to 0$$ 时，离散熵 $$H(X_{\Delta})$$ 与微分熵 $$h(X)$$ 的关系近似为：
+$$
+H(X_{\Delta}) \approx h(X) - \log \Delta = h(X) + \log \frac{1}{\Delta}
+$$
+    *   更精确地，微分熵可以被视为（讲师板书为 $$\hat{h}(X)$$，但通常用 $$h(X)$$ 表示）：
+$$
+h(X) = \lim_{\Delta \to 0} \left[ H(X_{\Delta}) - \log \frac{1}{\Delta} \right]
+$$
 3.  **物理解释与特性**
-    *   **无穷比特需求**：$\log \frac{1}{\Delta}$ 这一项随着 $\Delta \to 0$ 会趋向于无穷大 ($\infty$)。这直观地表明，要精确表示 (或无损编码) 一个连续随机变量，理论上需要无穷多个比特。
-    *   **相对度量**：微分熵 $h(X)$ 代表了 $H(X_{\Delta})$ 中扣除掉这个与量化精度相关的无穷大偏移量 (infinite offset) 之后的部分。它更多地反映了概率分布 $f(x)$ 的形状对不确定性的贡献，而不是一个绝对的信息量度量。
-    *   **非编码意义**：微分熵 $h(X)$ 本身**不直接表示**编码一个连续变量所需的平均比特数。
-    *   **可为负值**：与离散熵 $H(X) \ge 0$ 不同，微分熵 $h(X)$ **可以为负数**。
-        *   例如，对于均匀分布 $X \sim U[0, a]$，其 $f(x) = 1/a$ for $x \in [0,a]$。
-            $$h(X) = -\int_0^a \frac{1}{a} \log_2(\frac{1}{a}) dx = -(\frac{1}{a} \log_2 \frac{1}{a}) \cdot a = \log_2 a$$
-            若 $a < 1$ (如 $a=0.5$)，则 $h(X) = \log_2 0.5 = -1$ bit。
+    *   **无穷比特需求**：$$\log \frac{1}{\Delta}$$ 这一项随着 $$\Delta \to 0$$ 会趋向于无穷大 ($$\infty$$)。这直观地表明，要精确表示 (或无损编码) 一个连续随机变量，理论上需要无穷多个比特。
+    *   **相对度量**：微分熵 $$h(X)$$ 代表了 $$H(X_{\Delta})$$ 中扣除掉这个与量化精度相关的无穷大偏移量 (infinite offset) 之后的部分。它更多地反映了概率分布 $$f(x)$$ 的形状对不确定性的贡献，而不是一个绝对的信息量度量。
+    *   **非编码意义**：微分熵 $$h(X)$$ 本身**不直接表示**编码一个连续变量所需的平均比特数。
+    *   **可为负值**：与离散熵 $$H(X) \ge 0$$ 不同，微分熵 $$h(X)$$ **可以为负数**。
+        *   例如，对于均匀分布 $$X \sim U[0, a]$$，其 $$f(x) = 1/a$$ for $$x \in [0,a]$$。
+$$
+h(X) = -\int_0^a \frac{1}{a} \log_2(\frac{1}{a}) dx = -(\frac{1}{a} \log_2 \frac{1}{a}) \cdot a = \log_2 a
+$$
+            若 $$a < 1$$ (如 $$a=0.5$$)，则 $$h(X) = \log_2 0.5 = -1$$ bit。
     *   **非香农熵特性**：微分熵不具备离散熵的许多特性，例如它不是信息量的绝对度量，也不直接作为编码长度的下界。
     *   **关于无限精度计算的旁注**：
         > 讲师提及，如果计算机能够处理无限精度的实数，那么理论计算中的一些基本问题（如 `P vs NP` 问题，若 P=NP 则可能被解决）可能会有截然不同的答案，但这在物理现实中是不可能的。
@@ -52,110 +67,143 @@
 ### 二、联合与条件微分熵
 
 1.  **联合微分熵 (Joint Differential Entropy)**
-    *   对于两个连续随机变量 $X, Y$，其联合概率密度函数 (joint PDF) 为 $f_{XY}(x,y)$。
+    *   对于两个连续随机变量 $$X, Y$$，其联合概率密度函数 (joint PDF) 为 $$f_{XY}(x,y)$$。
     *   联合微分熵定义为：
-        $$h(X,Y) = -\iint f_{XY}(x,y) \log f_{XY}(x,y) dx dy$$
-
+$$
+h(X,Y) = -\iint f_{XY}(x,y) \log f_{XY}(x,y) dx dy
+$$
 2.  **条件微分熵 (Conditional Differential Entropy)**
     *   定义式：
-        $$h(X|Y) = -\iint f_{XY}(x,y) \log f_{X|Y}(x|y) dx dy$$
-        其中 $f_{X|Y}(x|y) = \frac{f_{XY}(x,y)}{f_Y(y)}$ 是在 $Y=y$ 条件下 $X$ 的条件概率密度函数。
+$$
+h(X|Y) = -\iint f_{XY}(x,y) \log f_{X|Y}(x|y) dx dy
+$$
+        其中 $$f_{X|Y}(x|y) = \frac{f_{XY}(x,y)}{f_Y(y)}$$ 是在 $$Y=y$$ 条件下 $$X$$ 的条件概率密度函数。
     *   也可以通过期望定义：
-        $$h(X|Y) = E_Y[h(X|Y=y)] = \int f_Y(y) h(X|Y=y) dy$$
-        其中 $h(X|Y=y) = -\int f_{X|Y}(x|y) \log f_{X|Y}(x|y) dx$。
+$$
+h(X|Y) = E_Y[h(X|Y=y)] = \int f_Y(y) h(X|Y=y) dy
+$$
+        其中 $$h(X|Y=y) = -\int f_{X|Y}(x|y) \log f_{X|Y}(x|y) dx$$。
 
 3.  **链式法则 (Chain Rule) 仍然成立**
     与离散熵类似，微分熵的链式法则也成立：
-    $$h(X,Y) = h(X) + h(Y|X) = h(Y) + h(X|Y)$$
-    *证明 $h(X,Y) = h(Y) + h(X|Y)$：*
-    $$h(X,Y) = -\iint f_{XY}(x,y) \log f_{XY}(x,y) dx dy$$
-    使用 $f_{XY}(x,y) = f_{X|Y}(x|y)f_Y(y)$，则 $\log f_{XY}(x,y) = \log f_{X|Y}(x|y) + \log f_Y(y)$。
-    $$h(X,Y) = -\iint f_{XY}(x,y) [\log f_{X|Y}(x|y) + \log f_Y(y)] dx dy$$
-    $$= -\iint f_{XY}(x,y) \log f_{X|Y}(x|y) dx dy - \iint f_{XY}(x,y) \log f_Y(y) dx dy$$
-    第一项即为 $h(X|Y)$。
-    第二项 $= -\int f_Y(y) \log f_Y(Y) \left( \int f_{X|Y}(x|y) dx \right) dy$。
-    由于 $\int f_{X|Y}(x|y) dx = 1$ (对任意固定的 $y$, $f_{X|Y}(x|y)$ 是关于 $x$ 的PDF)，
-    所以第二项 $= -\int f_Y(y) \log f_Y(y) dy = h(Y)$。
-    因此，$h(X,Y) = h(X|Y) + h(Y)$。同理可证 $h(X,Y) = h(X) + h(Y|X)$。
+$$
+h(X,Y) = h(X) + h(Y|X) = h(Y) + h(X|Y)
+$$
+    *证明 $$h(X,Y) = h(Y) + h(X|Y)$$：*
+$$
+h(X,Y) = -\iint f_{XY}(x,y) \log f_{XY}(x,y) dx dy
+$$
+    使用 $$f_{XY}(x,y) = f_{X|Y}(x|y)f_Y(y)$$，则 $$\log f_{XY}(x,y) = \log f_{X|Y}(x|y) + \log f_Y(y)$$。
+$$
+h(X,Y) = -\iint f_{XY}(x,y) [\log f_{X|Y}(x|y) + \log f_Y(y)] dx dy
+$$
+$$
+= -\iint f_{XY}(x,y) \log f_{X|Y}(x|y) dx dy - \iint f_{XY}(x,y) \log f_Y(y) dx dy
+$$
+    第一项即为 $$h(X|Y)$$。
+    第二项 $$= -\int f_Y(y) \log f_Y(Y) \left( \int f_{X|Y}(x|y) dx \right) dy$$。
+    由于 $$\int f_{X|Y}(x|y) dx = 1$$ (对任意固定的 $$y$$, $$f_{X|Y}(x|y)$$ 是关于 $$x$$ 的PDF)，
+    所以第二项 $$= -\int f_Y(y) \log f_Y(y) dy = h(Y)$$。
+    因此，$$h(X,Y) = h(X|Y) + h(Y)$$。同理可证 $$h(X,Y) = h(X) + h(Y|X)$$。
 
 ### 三、连续随机变量的互信息 (Mutual Information for Continuous r.v.)
 
 1.  **回顾离散情况下的互信息定义**
-    *   $I(X;Y) = H(X) - H(X|Y)$
-    *   $I(X;Y) = H(Y) - H(Y|X)$
-    *   $I(X;Y) = H(X) + H(Y) - H(X,Y)$
+    *   $$I(X;Y) = H(X) - H(X|Y)$$
+    *   $$I(X;Y) = H(Y) - H(Y|X)$$
+    *   $$I(X;Y) = H(X) + H(Y) - H(X,Y)$$
     *   $$I(X;Y) = \sum_{x,y} P_{XY}(x,y) \log \frac{P_{XY}(x,y)}{P_X(x)P_Y(y)}$$
 
 2.  **连续情况下的互信息定义**
-    设 $X, Y$ 为连续随机变量，其边际PDF分别为 $f_X(x), f_Y(y)$，联合PDF为 $f_{XY}(x,y)$。
-    1.  $I(X;Y) = h(X) - h(X|Y)$
-    2.  $I(X;Y) = h(Y) - h(Y|X)$
-    3.  $I(X;Y) = h(X) + h(Y) - h(X,Y)$
+    设 $$X, Y$$ 为连续随机变量，其边际PDF分别为 $$f_X(x), f_Y(y)$$，联合PDF为 $$f_{XY}(x,y)$$。
+    1.  $$I(X;Y) = h(X) - h(X|Y)$$
+    2.  $$I(X;Y) = h(Y) - h(Y|X)$$
+    3.  $$I(X;Y) = h(X) + h(Y) - h(X,Y)$$
     4.  $$I(X;Y) = \iint f_{XY}(x,y) \log \frac{f_{XY}(x,y)}{f_X(x)f_Y(y)} dx dy$$
 
 3.  **重要特性与普适性**
-    *   **离散化极限的收敛性**：当对连续随机变量 $X, Y$ 进行离散化得到 $X_{\Delta}, Y_{\Delta}$ 时，它们的（离散）互信息 $I(X_{\Delta}; Y_{\Delta})$ 在 $\Delta \to 0$ 时的极限会**收敛**到连续互信息 $I(X;Y)$。
-    *   **无穷偏移项的抵消**：在离散化过程中，之前讨论的无穷偏移项 $\log \frac{1}{\Delta}$ 会在互信息的计算中**相互抵消**。
+    *   **离散化极限的收敛性**：当对连续随机变量 $$X, Y$$ 进行离散化得到 $$X_{\Delta}, Y_{\Delta}$$ 时，它们的（离散）互信息 $$I(X_{\Delta}; Y_{\Delta})$$ 在 $$\Delta \to 0$$ 时的极限会**收敛**到连续互信息 $$I(X;Y)$$。
+    *   **无穷偏移项的抵消**：在离散化过程中，之前讨论的无穷偏移项 $$\log \frac{1}{\Delta}$$ 会在互信息的计算中**相互抵消**。
         例如，使用定义1：
-        $$I(X_{\Delta};Y_{\Delta}) = H(X_{\Delta}) - H(X_{\Delta}|Y_{\Delta})$$
-        我们已知 $H(X_{\Delta}) \approx h(X) + \log \frac{1}{\Delta}$。
-        对于条件熵，类似地可以推导出（讲师说明但未详细推导，其核心在于条件概率 $P(x_i|y_j) \approx \frac{f(x_i,y_j)\Delta^2}{f(y_j)\Delta} / \Delta = f(x_i|y_j)\Delta / \Delta$ (这里有点小问题，应为 $p(x_i|y_j) = P(X \in \text{bin}_i | Y \in \text{bin}_j)$，其熵 $H(X_\Delta | Y_\Delta = y_{j,\Delta}) \approx h(X|Y=y_j) - \log \Delta $ ）。一个更规范的推导表明 $H(X_{\Delta}|Y_{\Delta}) \approx h(X|Y) + \log\frac{1}{\Delta}$ 也成立。
+$$
+I(X_{\Delta};Y_{\Delta}) = H(X_{\Delta}) - H(X_{\Delta}|Y_{\Delta})
+$$
+        我们已知 $$H(X_{\Delta}) \approx h(X) + \log \frac{1}{\Delta}$$。
+        对于条件熵，类似地可以推导出（讲师说明但未详细推导，其核心在于条件概率 $$P(x_i|y_j) \approx \frac{f(x_i,y_j)\Delta^2}{f(y_j)\Delta} / \Delta = f(x_i|y_j)\Delta / \Delta$$ (这里有点小问题，应为 $$p(x_i|y_j) = P(X \in \text{bin}_i | Y \in \text{bin}_j)$$，其熵 $$H(X_\Delta | Y_\Delta = y_{j,\Delta}) \approx h(X|Y=y_j) - \log \Delta $$ ）。一个更规范的推导表明 $$H(X_{\Delta}|Y_{\Delta}) \approx h(X|Y) + \log\frac{1}{\Delta}$$ 也成立。
         因此：
-        $$I(X_{\Delta};Y_{\Delta}) \approx \left(h(X) + \log \frac{1}{\Delta}\right) - \left(h(X|Y) + \log \frac{1}{\Delta}\right)$$
-        $$= h(X) - h(X|Y) = I(X;Y)$$
-    *   **结论**：互信息 $I(X;Y)$ 对于连续随机变量是一个具有*普适意义 (universal meaning / well-defined)* 的度量。它真正度量了 $X$ 和 $Y$ 之间共享的信息量，不像微分熵那样仅仅是形式上的推广，其值不依赖于量化精度 $\Delta$。
+$$
+I(X_{\Delta};Y_{\Delta}) \approx \left(h(X) + \log \frac{1}{\Delta}\right) - \left(h(X|Y) + \log \frac{1}{\Delta}\right)
+$$
+$$
+= h(X) - h(X|Y) = I(X;Y)
+$$
+    *   **结论**：互信息 $$I(X;Y)$$ 对于连续随机变量是一个具有*普适意义 (universal meaning / well-defined)* 的度量。它真正度量了 $$X$$ 和 $$Y$$ 之间共享的信息量，不像微分熵那样仅仅是形式上的推广，其值不依赖于量化精度 $$\Delta$$。
 
 ### 四、连续随机变量的KL散度 (KL Divergence) 或相对熵 (Relative Entropy)
 
 1.  **定义**
-    *   设 $f(x)$ 和 $g(x)$ 是两个概率密度函数 (PDF)。
-    *   $f$ 相对于 $g$ 的KL散度（讲师板书为 $KL(f || g)$，通常印刷体为 $D_{KL}(f||g)$ 或 $D(f||g)$）定义为：
-        $$KL(f||g) = \int f(x) \log \frac{f(x)}{g(x)} dx$$
+    *   设 $$f(x)$$ 和 $$g(x)$$ 是两个概率密度函数 (PDF)。
+    *   $$f$$ 相对于 $$g$$ 的KL散度（讲师板书为 $$KL(f || g)$$，通常印刷体为 $$D_{KL}(f||g)$$ 或 $$D(f||g)$$）定义为：
+$$
+KL(f||g) = \int f(x) \log \frac{f(x)}{g(x)} dx
+$$
         (如果对数底为2，单位是比特)
 
 2.  **与离散化的关系**
-    *   当对定义在同一支撑集上的连续随机变量（其PDF为 $f(x), g(x)$）进行离散化，得到概率质量函数 $P_{X_{\Delta}}(x_i) = f(x_i)\Delta$ 和 $P_{Y_{\Delta}}(x_i) = g(x_i)\Delta$。
+    *   当对定义在同一支撑集上的连续随机变量（其PDF为 $$f(x), g(x)$$）进行离散化，得到概率质量函数 $$P_{X_{\Delta}}(x_i) = f(x_i)\Delta$$ 和 $$P_{Y_{\Delta}}(x_i) = g(x_i)\Delta$$。
     *   离散KL散度：
-        $$KL(P_{X_{\Delta}} || P_{Y_{\Delta}}) = \sum_i P_{X_{\Delta}}(x_i) \log \frac{P_{X_{\Delta}}(x_i)}{P_{Y_{\Delta}}(x_i)}$$
-        $$= \sum_i f(x_i)\Delta \log \frac{f(x_i)\Delta}{g(x_i)\Delta} = \sum_i f(x_i)\Delta \log \frac{f(x_i)}{g(x_i)}$$
-    *   当 $\Delta \to 0$ 时，上式收敛到 $\int f(x) \log \frac{f(x)}{g(x)} dx = KL(f||g)$。
-    *   这里的 $\Delta$ 项在比值中直接消掉了，因此KL散度对于连续随机变量也是一个*定义良好 (well-defined)*且具有普适性的概念，其值不依赖于量化精度。
+$$
+KL(P_{X_{\Delta}} || P_{Y_{\Delta}}) = \sum_i P_{X_{\Delta}}(x_i) \log \frac{P_{X_{\Delta}}(x_i)}{P_{Y_{\Delta}}(x_i)}
+$$
+$$
+= \sum_i f(x_i)\Delta \log \frac{f(x_i)\Delta}{g(x_i)\Delta} = \sum_i f(x_i)\Delta \log \frac{f(x_i)}{g(x_i)}
+$$
+    *   当 $$\Delta \to 0$$ 时，上式收敛到 $$\int f(x) \log \frac{f(x)}{g(x)} dx = KL(f||g)$$。
+    *   这里的 $$\Delta$$ 项在比值中直接消掉了，因此KL散度对于连续随机变量也是一个*定义良好 (well-defined)*且具有普适性的概念，其值不依赖于量化精度。
 
 3.  **与互信息的关系**
-    *   回顾离散情况：$I(X;Y) = KL(P_{XY} || P_X P_Y)$。
+    *   回顾离散情况：$$I(X;Y) = KL(P_{XY} || P_X P_Y)$$。
     *   对于连续随机变量，同样成立：
-        $$I(X;Y) = KL(f_{XY} || f_X f_Y)$$
-        $$= \iint f_{XY}(x,y) \log \frac{f_{XY}(x,y)}{f_X(x)f_Y(y)} dx dy$$
-    *   这表明互信息可以看作是联合分布 $f_{XY}(x,y)$ 与“假设 $X,Y$ 独立时的分布” $f_X(x)f_Y(y)$ 之间的KL散度。这个概念同样具有普适性。
+$$
+I(X;Y) = KL(f_{XY} || f_X f_Y)
+$$
+$$
+= \iint f_{XY}(x,y) \log \frac{f_{XY}(x,y)}{f_X(x)f_Y(y)} dx dy
+$$
+    *   这表明互信息可以看作是联合分布 $$f_{XY}(x,y)$$ 与“假设 $$X,Y$$ 独立时的分布” $$f_X(x)f_Y(y)$$ 之间的KL散度。这个概念同样具有普适性。
 
 ### 五、习题：连续互信息定义的等价性证明
 
-**问题：** 请用概率密度函数 $f_X(x)$, $f_Y(y)$, $f_{XY}(x,y)$ 以及条件概率密度函数 $f_{X|Y}(x|y)$ 和 $f_{Y|X}(y|x)$ 的积分表达式来证明以下三个互信息定义在连续情况下是等价的：
-1.  $I_1(X;Y) = h(X) - h(X|Y)$
-2.  $I_2(X;Y) = h(Y) - h(Y|X)$
-3.  $I_3(X;Y) = h(X) + h(Y) - h(X,Y)$
+**问题：** 请用概率密度函数 $$f_X(x)$$, $$f_Y(y)$$, $$f_{XY}(x,y)$$ 以及条件概率密度函数 $$f_{X|Y}(x|y)$$ 和 $$f_{Y|X}(y|x)$$ 的积分表达式来证明以下三个互信息定义在连续情况下是等价的：
+1.  $$I_1(X;Y) = h(X) - h(X|Y)$$
+2.  $$I_2(X;Y) = h(Y) - h(Y|X)$$
+3.  $$I_3(X;Y) = h(X) + h(Y) - h(X,Y)$$
 
 **解答：**
 我们已知微分熵的链式法则：
-(A) $h(X,Y) = h(X) + h(Y|X)$
-(B) $h(X,Y) = h(Y) + h(X|Y)$
+(A) $$h(X,Y) = h(X) + h(Y|X)$$
+(B) $$h(X,Y) = h(Y) + h(X|Y)$$
 
-*   **证明 $I_1(X;Y) = I_3(X;Y)$:**
-    $I_1(X;Y) = h(X) - h(X|Y)$
-    根据链式法则 (B)，$h(X|Y) = h(X,Y) - h(Y)$。
-    代入 $I_1(X;Y)$：
-    $I_1(X;Y) = h(X) - (h(X,Y) - h(Y)) = h(X) + h(Y) - h(X,Y) = I_3(X;Y)$。
+*   **证明 $$I_1(X;Y) = I_3(X;Y)$$:**
+$$
+I_1(X;Y) = h(X) - h(X|Y)
+$$
+    根据链式法则 (B)，$$h(X|Y) = h(X,Y) - h(Y)$$。
+    代入 $$I_1(X;Y)$$：
+    $$I_1(X;Y) = h(X) - (h(X,Y) - h(Y)) = h(X) + h(Y) - h(X,Y) = I_3(X;Y)$$。
     所以，定义1与定义3等价。
 
-*   **证明 $I_2(X;Y) = I_3(X;Y)$:**
-    $I_2(X;Y) = h(Y) - h(Y|X)$
-    根据链式法则 (A)，$h(Y|X) = h(X,Y) - h(X)$。
-    代入 $I_2(X;Y)$：
-    $I_2(X;Y) = h(Y) - (h(X,Y) - h(X)) = h(X) + h(Y) - h(X,Y) = I_3(X;Y)$。
+*   **证明 $$I_2(X;Y) = I_3(X;Y)$$:**
+$$
+I_2(X;Y) = h(Y) - h(Y|X)
+$$
+    根据链式法则 (A)，$$h(Y|X) = h(X,Y) - h(X)$$。
+    代入 $$I_2(X;Y)$$：
+    $$I_2(X;Y) = h(Y) - (h(X,Y) - h(X)) = h(X) + h(Y) - h(X,Y) = I_3(X;Y)$$。
     所以，定义2与定义3等价。
 
 由于定义1和定义2均与定义3等价，所以定义1、定义2、定义3三者相互等价。
-(第四个定义 $I(X;Y) = \iint f_{XY}(x,y) \log \frac{f_{XY}(x,y)}{f_X(x)f_Y(y)} dx dy$ 可以通过展开 $I_3(X;Y)$ 的各项定义并利用 $f_{XY}=f_X f_{Y|X}$ 等关系代入化简得到，是更基本的出发点。)
+(第四个定义 $$I(X;Y) = \iint f_{XY}(x,y) \log \frac{f_{XY}(x,y)}{f_X(x)f_Y(y)} dx dy$$ 可以通过展开 $$I_3(X;Y)$$ 的各项定义并利用 $$f_{XY}=f_X f_{Y|X}$$ 等关系代入化简得到，是更基本的出发点。)
 
 ---
 
@@ -166,17 +214,17 @@
 1.  **熵与随机对象：**
     *   熵 (Entropy) 描述的是一个*随机对象 (random object)*。
     *   核心思想：对这个随机对象进行编码（表示）所需的*最小平均描述长度 (minimum average description length)*。
-    > 板书：Entropy $\leftrightarrow$ random object $\leftrightarrow$ minimum description length on average
+    > 板书：Entropy $$\leftrightarrow$$ random object $$\leftrightarrow$$ minimum description length on average
 
 2.  **柯尔莫哥洛夫复杂度与确定性对象：**
-    *   现在考虑的不是随机对象，而是一个*确定的对象 (deterministic object)*，通常是一个特定的二进制串 (string) $s \in \{0,1\}^*$ (其中 $\{0,1\}^*$ 表示所有有限长度的二进制串集合)。
-    *   **核心问题：** 对于一个确定的对象 $s$，它的*最小描述长度 (minimum description length)* 是什么？
+    *   现在考虑的不是随机对象，而是一个*确定的对象 (deterministic object)*，通常是一个特定的二进制串 (string) $$s \in \{0,1\}^*$$ (其中 $$\{0,1\}^*$$ 表示所有有限长度的二进制串集合)。
+    *   **核心问题：** 对于一个确定的对象 $$s$$，它的*最小描述长度 (minimum description length)* 是什么？
     *   **例子：**
-        *   串 $s_1 = 000\dots0$ ($n$ 个0)。一个可能的描述是程序 "打印'0' $n$ 次"。
-        *   串 $s_2 = 011011011\dots$ (某个模式重复 $k$ 次)。一个可能的描述是程序 "打印模式 '011' $k$ 次"。
-        *   串 $s_3 = 1101010010111001\dots$ (一个看起来随机的串)。可能最短的描述就是程序 "打印 '1101010010111001...'"，即直接复制该串本身。
+        *   串 $$s_1 = 000\dots0$$ ($$n$$ 个0)。一个可能的描述是程序 "打印'0' $$n$$ 次"。
+        *   串 $$s_2 = 011011011\dots$$ (某个模式重复 $$k$$ 次)。一个可能的描述是程序 "打印模式 '011' $$k$$ 次"。
+        *   串 $$s_3 = 1101010010111001\dots$$ (一个看起来随机的串)。可能最短的描述就是程序 "打印 '1101010010111001...'"，即直接复制该串本身。
     *   柯尔莫哥洛夫复杂度的动机就是去形式化并量化描述一个**特定、确定对象**的*最小描述长度*。
-    *   研究对象通常限定在*串空间 (string space)* $\{0,1\}^*$。
+    *   研究对象通常限定在*串空间 (string space)* $$\{0,1\}^*$$。
 
 ### 二、计算 (Computation) 的形式化
 
@@ -190,17 +238,17 @@
 ### 三、可计算性 (Computability) 与不可计算性 (Uncomputability)
 
 1.  **引例：解方程**
-    *   **问题1 (一元多项式整数解)：** 给定一元 $n$ 次多项式方程 $a_n x^n + \dots + a_1 x + a_0 = 0$ (系数 $a_i \in \mathbb{R}$)。问：此方程是否有整数解 $x \in \mathbb{Z}$？
+    *   **问题1 (一元多项式整数解)：** 给定一元 $$n$$ 次多项式方程 $$a_n x^n + \dots + a_1 x + a_0 = 0$$ (系数 $$a_i \in \mathbb{R}$$)。问：此方程是否有整数解 $$x \in \mathbb{Z}$$？
         *   **答案：可计算的 (computable)。**
-        *   **原因：** 存在一个解的搜索半径 $R$ (可根据系数 $a_i$ 确定，例如柯西界)。只需检查有限个整数（在 $[-R, R]$ 范围内）是否为解。这是一个有穷的、必定会终止的算法。
+        *   **原因：** 存在一个解的搜索半径 $$R$$ (可根据系数 $$a_i$$ 确定，例如柯西界)。只需检查有限个整数（在 $$[-R, R]$$ 范围内）是否为解。这是一个有穷的、必定会终止的算法。
 
     *   **问题2 (丢番图方程 / 希尔伯特第十问题)：** 给定一个多元多项式方程（或方程组），其系数为整数。问：此方程（或方程组）是否有整数解？
         *   **答案：不可计算的 (uncomputable) / 不可判定的 (undecidable)。** (马季亚谢维奇定理, 1970)
         *   **意义：** 不存在一个通用的算法，对于任意给定的丢番图方程，都能在有限步骤内判断其是否有整数解。
 
 2.  **停机问题 (Halting Problem)**
-    *   **问题描述：** 给定一个算法（如图灵机程序代码）$a$ 和一个输入 $i$。问：算法 $a$ 在输入 $i$ 上是否会停机 (halt) 并在有限时间内给出输出？
-    > **板书：** Halting Problem $(a, i)$, where $a$ is code, $i$ is input.
+    *   **问题描述：** 给定一个算法（如图灵机程序代码）$$a$$ 和一个输入 $$i$$。问：算法 $$a$$ 在输入 $$i$$ 上是否会停机 (halt) 并在有限时间内给出输出？
+    > **板书：** Halting Problem $$(a, i)$$, where $$a$$ is code, $$i$$ is input.
     *   **答案：不可计算的 (uncomputable / undecidable)。** (图灵证明, 1936)
     *   **意义：** 不存在一个通用的算法 (判定器)，能够判断任意给定的程序在任意给定的输入上是否会最终停机。
 
@@ -208,37 +256,37 @@
 
 1.  **判定问题 (Decision Problems)：**
     *   **定义：** 一个答案是“是”或“否”的问题。
-    *   **形式化：** 可以表示为一个*语言 (Language)* $L \subseteq \{0,1\}^*$。一个语言是所有二进制串集合 `$\{0,1\}^*$` 的一个子集。
-    *   **任务：** 对于任意给定的输入字符串 $x \in \{0,1\}^*$，判定 $x$ 是否属于语言 $L$ (即 $x \in L$ ?)。
+    *   **形式化：** 可以表示为一个*语言 (Language)* $$L \subseteq \{0,1\}^*$$。一个语言是所有二进制串集合 `$$\{0,1\}^*$$` 的一个子集。
+    *   **任务：** 对于任意给定的输入字符串 $$x \in \{0,1\}^*$$，判定 $$x$$ 是否属于语言 $$L$$ (即 $$x \in L$$ ?)。
     > **板书：**
     > Problems: Decision Problems
-    > Given $L \subseteq \{0,1\}^*$
-    > decide if $x \in L$? for every $x \in \{0,1\}^*$
+    > Given $$L \subseteq \{0,1\}^*$$
+    > decide if $$x \in L$$? for every $$x \in \{0,1\}^*$$
 
 2.  **算法 (Algorithms / Turing Machines)：**
     *   **定义：** 一个精确定义的、一步一步执行的计算过程，用于解决特定的判定问题（或其他计算任务）。
     *   **形式化：** 可以表示为一个**图灵机**。
-    *   **编码：** 任何算法（或**图灵机**）本身都可以被编码为一个唯一的二进制字符串 $a \in \{0,1\}^*$。
+    *   **编码：** 任何算法（或**图灵机**）本身都可以被编码为一个唯一的二进制字符串 $$a \in \{0,1\}^*$$。
     > **板书：**
     > Algorithm (Turing Machines)
-    > alg $a$
-    > $a \in \{0,1\}^*$
+    > alg $$a$$
+    > $$a \in \{0,1\}^*$$
 
 ### 五、问题与算法数量的比较 (基数论证)
 
 1.  **算法的数量：**
-    *   由于每个算法都可以编码为一个二进制字符串，而二进制字符串的集合 `$\{0,1\}^*$` 是*可数无穷的 (countably infinite)* (其基数与自然数集 $\mathbb{N}$ 或整数集 $\mathbb{Z}$ 相同，记为 $\aleph_0$ )。
+    *   由于每个算法都可以编码为一个二进制字符串，而二进制字符串的集合 `$$\{0,1\}^*$$` 是*可数无穷的 (countably infinite)* (其基数与自然数集 $$\mathbb{N}$$ 或整数集 $$\mathbb{Z}$$ 相同，记为 $$\aleph_0$$ )。
     *   因此，所有可能的算法的数量也是*可数无穷的*。
-    > **板书 (在 Algorithm $a \in \{0,1\}^*$ 下方)：** $\mathbb{Z}$ (表示可数无穷)
+    > **板书 (在 Algorithm $$a \in \{0,1\}^*$$ 下方)：** $$\mathbb{Z}$$ (表示可数无穷)
 
 2.  **判定问题的数量：**
-    *   每个判定问题对应于 `$\{0,1\}^*$` 的一个子集 (即一个语言 $L$)。
-    *   `$\{0,1\}^*$` 的子集的数量等于其*幂集 (power set)* $\mathcal{P}(\{0,1\}^*)$ 的大小。
-    *   根据康托定理，任何集合的幂集的基数严格大于原集合的基数。由于 `$\{0,1\}^*$` 是*可数无穷的* ($\aleph_0$)，其幂集的基数是*不可数无穷的 (uncountably infinite)*，记为 $2^{\aleph_0}$。这个基数与实数集 $\mathbb{R}$ 的基数相同。
-    > **板书 (在 Decision Problems $L \subseteq \{0,1\}^*$ 旁边)：** $\mathbb{R}$ (表示不可数无穷)
+    *   每个判定问题对应于 `$$\{0,1\}^*$$` 的一个子集 (即一个语言 $$L$$)。
+    *   `$$\{0,1\}^*$$` 的子集的数量等于其*幂集 (power set)* $$\mathcal{P}(\{0,1\}^*)$$ 的大小。
+    *   根据康托定理，任何集合的幂集的基数严格大于原集合的基数。由于 `$$\{0,1\}^*$$` 是*可数无穷的* ($$\aleph_0$$)，其幂集的基数是*不可数无穷的 (uncountably infinite)*，记为 $$2^{\aleph_0}$$。这个基数与实数集 $$\mathbb{R}$$ 的基数相同。
+    > **板书 (在 Decision Problems $$L \subseteq \{0,1\}^*$$ 旁边)：** $$\mathbb{R}$$ (表示不可数无穷)
 
 3.  **结论 (基数论证 / 对角线论证的推论)：**
-    *   判定问题的数量 (*不可数无穷*, $2^{\aleph_0}$) **远大于** 算法的数量 (*可数无穷*, $\aleph_0$)。
+    *   判定问题的数量 (*不可数无穷*, $$2^{\aleph_0}$$) **远大于** 算法的数量 (*可数无穷*, $$\aleph_0$$)。
     *   这意味着，*几乎所有 (in a measure-theoretic sense)* 的判定问题都是不可计算的，即不存在算法能够解决它们。
     *   能被算法解决的问题 (可计算问题 / 可判定语言) 只是所有可能问题中的沧海一粟。
 
@@ -254,8 +302,8 @@
 ## 七、总结
 
 本讲前半部分将信息论的核心概念从离散领域拓展到了连续随机变量。我们学习了：
-*   **微分熵** $h(X)$：作为离散熵的形式推广，其值与量化精度 $\Delta$ 相关 ($H(X_\Delta) \approx h(X) - \log\Delta$)，可能为负，不直接代表编码长度。
-*   **连续互信息 $I(X;Y)$ 和连续KL散度 $KL(f||g)$**：这两个量在连续情况下依然具有*普适性和明确的物理意义*，因为在它们的定义或离散化逼近中，与 $\Delta$ 相关的无穷项会相互抵消。它们是衡量变量间依赖关系或分布间差异的稳健工具。
+*   **微分熵** $$h(X)$$：作为离散熵的形式推广，其值与量化精度 $$\Delta$$ 相关 ($$H(X_\Delta) \approx h(X) - \log\Delta$$)，可能为负，不直接代表编码长度。
+*   **连续互信息 $$I(X;Y)$$ 和连续KL散度 $$KL(f||g)$$**：这两个量在连续情况下依然具有*普适性和明确的物理意义*，因为在它们的定义或离散化逼近中，与 $$\Delta$$ 相关的无穷项会相互抵消。它们是衡量变量间依赖关系或分布间差异的稳健工具。
 
 本讲后半部分为后续的柯尔莫哥洛夫复杂度理论铺垫了计算理论的基础：
 *   “计算”通过**图灵机**得以形式化。
