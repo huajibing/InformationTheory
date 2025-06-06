@@ -93,7 +93,7 @@ $$
 $$
 H(M) = \log_2(2^{nR}) = nR
 $$
-1.  **互信息 $$I(M; Y^n)$$ 的上界:**
+2.  **互信息 $$I(M; Y^n)$$ 的上界:**
     消息 $$M$$ 经过编码器得到码字 $$X^n(M)$$（简记为 $$X^n$$），再通过信道 $$P(Y|X)$$ 得到接收序列 $$Y^n$$。这是一个马尔可夫链: $$M \rightarrow X^n(M) \rightarrow Y^n$$。
     根据*数据处理不等式 (Data Processing Inequality)*，有：
 $$
@@ -118,12 +118,12 @@ $$
 $$
 I(M; Y^n) \le nC
 $$
-1.  **条件熵 $$H(M|Y^n)$$ 的下界:**
+3.  **条件熵 $$H(M|Y^n)$$ 的下界:**
     根据条件熵的定义 $$H(M|Y^n) = H(M) - I(M; Y^n)$$，代入上述结果：
 $$
 H(M|Y^n) \ge nR - nC = n(R-C)
 $$
-1.  **应用 Fano 不等式:**
+4.  **应用 Fano 不等式:**
     将 Fano 不等式 $$P_e \ge \frac{H(X|Y) - 1}{\log_2|\mathcal{X}|}$$ 应用于当前场景：
     *   $$X \rightarrow M$$ (发送的消息)
     *   $$Y \rightarrow Y^n$$ (接收的序列)
@@ -134,7 +134,7 @@ $$
 $$
 \bar{P}_e^{(n)} \ge \frac{H(M|Y^n) - 1}{\log_2(2^{nR})} = \frac{H(M|Y^n) - 1}{nR}
 $$
-1.  **推导错误概率的下界:**
+5.  **推导错误概率的下界:**
         将 $$H(M|Y^n) \ge n(R-C)$$ 代入 Fano 不等式：
 $$
 \bar{P}_e^{(n)} \ge \frac{n(R-C) - 1}{nR}
@@ -149,7 +149,7 @@ $$
 $$
 \bar{P}_e^{(n)} \ge \left(1 - \frac{C}{R}\right) - \frac{1}{nR}
 $$
-1.  **结论：**
+6.  **结论：**
     如果速率 $$R > C$$，那么 $$1 - \frac{C}{R} > 0$$ (因为 $$C \ge 0$$)。
     当码长 $$n \to \infty$$ 时，$$\frac{1}{nR} \to 0$$。
     因此，对于足够大的 $$n$$：
