@@ -91,9 +91,9 @@ $$
     >   (小于等于 $$m$$ 的素数个数 $$\pi(m)$$ 近似于 $$\frac{m}{\ln m}$$)。
     >   这个定理描述了素数的分布密度，保证了在需要时（如随机化协议中）可以找到足够大的素数。
     *   ***哥德巴赫猜想 (Goldbach Conjecture)***:
-    >   $$\exists n_1, n_2$$ prime`
+    >   $$\exists n_1, n_2$$ prime
     >   $$m = n_1 + n_2$$
-    >   $$m$$ is even`
+    >   $$m$$ is even
     >   (任何一个大于2的偶数都可以表示为两个素数之和)。
 *   教师提到陈景润在哥德巴赫猜想上的贡献（证明了“1+2”，即任何一个充分大的偶数都可以表示为一个素数与一个至多是两个素数乘积之和）。
 
@@ -120,8 +120,6 @@ $$
 
 ## III. 最大熵原理 (Maximum Entropy Principle)
 
-## III. 最大熵原理 (Maximum Entropy Principle)
-
 ### 3.1 问题引入与一维情况回顾
 
 *   > **(教师板书)**
@@ -145,21 +143,21 @@ $$
 
 *   **定理**: 对于 $$d$$ 维随机向量 $$X$$，在给定均值 $$E[X]=\vec{\mu}$$ 和协方差矩阵 $$Cov(X)=\Sigma$$ (其中 $$\Sigma$$ 是正定矩阵) 的条件下，使得其***微分熵 (differential entropy)*** $$h(X)$$ 最大的分布是***多维高斯分布 (Multivariate Gaussian distribution)***，即 $$X \sim N(\vec{\mu}, \Sigma)$$。
 *   > **(教师板书 - 以均值为0为例)**:
-    > *   `X d-dim random vector`
-    > *   `E[X] = $$\vec{0}$$
-    > *   `Cov(X) = $$\Sigma$$ (旁边有 $$E[XX^T]$$)
-    > *   `Max Entropy distribution is $$N(\vec{0}, \Sigma)$$` (教师写为 `Th` (Theorem) $$N(0, \Sigma)$$)
+    > *   X d-dim random vector
+    > *   E[X] = $$\vec{0}$$
+    > *   Cov(X) = $$\Sigma$$ (旁边有 $$E[XX^T]$$)
+    > *   Max Entropy distribution is $$N(\vec{0}, \Sigma)$$ (教师写为 `Th` (Theorem) $$N(0, \Sigma)$$)
 
 ### 3.3 最大熵原理的证明 (多维高斯情况)
 
 我们将证明：若随机向量 $$X$$ 的均值为 $$\vec{0}$$，协方差为 $$\Sigma$$，则其微分熵 $$h(X)$$ 小于等于具有相同均值和协方差的多维高斯分布 $$Y \sim N(\vec{0}, \Sigma)$$ 的微分熵 $$h(Y)$$。
 
 *   > **(教师板书 - 定理陈述)**:
-    > *   `Thm`
-    > *   `Let X be a d-dim random vector.`
-    > *   `EX = $$\vec{0}$$`, `Cov(X) = $$\Sigma$$`
-    > *   `Let Y ~ N($$\vec{0}$$, $$\Sigma$$)`
-    > *   `Then $$h(X) \le h(Y)$$`
+    > *   Thm
+    > *   Let X be a d-dim random vector.
+    > *   EX = $$\vec{0}$$, Cov(X) = $$\Sigma$$
+    > *   Let Y ~ N($$\vec{0}$$, $$\Sigma$$)
+    > *   Then $$h(X) \le h(Y)$$
 
 *   **证明过程 (利用KL散度)**:
 1.  令 $$f_X(t)$$ 为随机向量 $$X$$ 的概率密度函数 (PDF)，$$f_Y(t)$$ 为随机向量 $$Y \sim N(\vec{0}, \Sigma)$$ 的 PDF。
@@ -240,10 +238,10 @@ $$
 最大熵原理不仅适用于连续随机变量，也适用于离散随机变量。
 
 *   > **(教师板书 - 黑板右上角)**
-    > *   `rev X discrete` (回顾X是离散型随机变量)
-    > *   `s.t. pmf $$p_i$$` (其概率质量函数为 $$p_i = P(X=x_i)$$)
-    > *   `EX = $$\mu$$` (给定均值 $$E[X] = \sum_i x_i p_i = \mu$$)
-    > *   `C. $$e^{-\lambda t}$$` (教师提示最大熵分布的形式，具体指 $$p_i = C e^{-\lambda x_i}$$, $$C$$为归一化常数)
+    > *   rev X discrete (回顾X是离散型随机变量)
+    > *   s.t. pmf $$p_i$$ (其概率质量函数为 $$p_i = P(X=x_i)$$)
+    > *   EX = $$\mu$$ (给定均值 $$E[X] = \sum_i x_i p_i = \mu$$)
+    > *   C. $$e^{-\lambda t}$$ (教师提示最大熵分布的形式，具体指 $$p_i = C e^{-\lambda x_i}$$, $$C$$为归一化常数)
 
 *   **一般形式**:
     如果对一个随机变量 $$X$$ (离散或连续)，我们有一些期望值形式的约束：
