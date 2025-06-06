@@ -61,8 +61,8 @@ $$
 ### 2. 联合渐进均分割特性 (Joint AEP)
 *   **设定:** $$(X_1, Y_1), (X_2, Y_2), \dots, (X_n, Y_n)$$ 为 i.i.d. 的随机变量对序列，每对服从联合分布 $$P(x,y)$$。其联合熵为 $$H(X,Y)$$，边缘熵为 $$H(X), H(Y)$$。
 *   ***联合典型集 $$A_{\epsilon}^{(n)}(X,Y)$$:**
-    一个序列对 $$(x^n, y^n)$$ 被称为*联合 $$\epsilon$$"`-典型*，如果它同时满足：
-    1.  $$P(x^n) \approx 2^{-nH(X)}$$ (即 `$$\left| -\frac{1}{n}\log_2 P(x^n) - H(X) \right| \le \epsilon$$)
+    一个序列对 $$(x^n, y^n)$$ 被称为*联合 $$\epsilon$$-典型*，如果它同时满足：
+    1.  $$P(x^n) \approx 2^{-nH(X)}$$ (即 $$\left| -\frac{1}{n}\log_2 P(x^n) - H(X) \right| \le \epsilon$$)
     2.  $$P(y^n) \approx 2^{-nH(Y)}$$ (即 $$\left| -\frac{1}{n}\log_2 P(y^n) - H(Y) \right| \le \epsilon$$)
     3.  $$P(x^n, y^n) \approx 2^{-nH(X,Y)}$$ (即 $$\left| -\frac{1}{n}\log_2 P(x^n, y^n) - H(X,Y) \right| \le \epsilon$$)
     (注：严格定义中，有时仅用第3条，前两条可由第3条导出。但同时列出更清晰。)
@@ -119,20 +119,20 @@ $$
 ### 3. 译码规则 (Decoding Algorithm/Rule)
 *   当接收端收到一个序列 $$\mathbf{y} = (y_1, \dots, y_n)$$ 后，译码器执行以下操作：
 *   ***联合典型译码 (Jointly Typical Decoding):***
-    译码器检查编码簿 $$CB$$ 中的每一个码字 $$c_i$$ (记为 $$\mathbf{x}_i$$)，判断序列对 $$(\mathbf{x}_i, \mathbf{y})$$ 是否是联合 $$\epsilon$$"`-典型的。这里的联合典型性是相对于真实的联合概率分布 `$$P(X,Y) = P(X)P(Y|X)$$ 而言的，其中 $$P(X)$$ 是用于生成编码簿的那个使 $$I(X;Y)=C$$ 的输入分布，$$P(Y|X)$$ 是信道的转移概率。
+    译码器检查编码簿 $$CB$$ 中的每一个码字 $$c_i$$ (记为 $$\mathbf{x}_i$$)，判断序列对 $$(\mathbf{x}_i, \mathbf{y})$$ 是否是联合 $$\epsilon$$-典型的。这里的联合典型性是相对于真实的联合概率分布 $$P(X,Y) = P(X)P(Y|X)$$ 而言的，其中 $$P(X)$$ 是用于生成编码簿的那个使 $$I(X;Y)=C$$ 的输入分布，$$P(Y|X)$$ 是信道的转移概率。
 
 *   **译码判决：**
     *   **译码成功 (Decoding Success):**
         如果存在**唯一一个**码字 $$c_i \in CB$$ 使得 $$(\mathbf{x}_i, \mathbf{y})$$ 是联合典型的，则译码器输出与 $$c_i$$ 对应的消息 $$m_i$$。
-        > (板书参考): `(c) if there is a unique $$c_i=(x_1, \ldots, x_n)$$ forming jointly typical w/ $$y_1, \ldots, y_n$$. V`
+        > (板书参考): (c) if there is a unique $$c_i=(x_1, \ldots, x_n)$$ forming jointly typical w/ $$y_1, \ldots, y_n$$. V
         (注：译码成功隐含要求接收到的序列 $$\mathbf{y}$$ 本身是关于其边际分布 $$P(Y)$$ 的典型序列，因为如果 $$\mathbf{y}$$ 非典型，它不可能与任何 $$\mathbf{x}_i$$ 构成联合典型序列。)
 
     *   **译码失败 (Decoding Failure):**
         *   **情况 (a) - 无联合典型码字:** 如果在编码簿中找不到任何一个码字 $$c_j$$ 使得 $$(\mathbf{x}_j, \mathbf{y})$$ 是联合典型的，则译码失败。
-            > (板书): `(a) if no such $$x_1 \ldots x_n$$, report fail.`
+            > (板书): (a) if no such $$x_1 \ldots x_n$$, report fail.
             教授补充：此情况包括了 $$\mathbf{y}$$ 本身非典型的情形。
         *   **情况 (b) - 多于一个联合典型码字:** 如果找到了多个（不止一个）码字 $$c_j, c_k, \ldots$$ ($$j \neq k$$) 都与接收到的 $$\mathbf{y}$$ 构成联合典型序列，译码器无法唯一确定发送的是哪个消息，则译码失败。
-            > (板书): `(b) if there are more than one codewords jointly typical w/ $$(y_1, \ldots, y_n)$$, report fail.`
+            > (板书): (b) if there are more than one codewords jointly typical w/ $$(y_1, \ldots, y_n)$$, report fail.
 
 ### 4. 差错概率分析 (Error Probability Analysis)
 *   假设不失一般性，发送的是消息 $$m_1$$，对应的码字是 $$c_1$$ (记为 $$\mathbf{x}_1$$)。接收到的序列为 $$\mathbf{y}$$。
