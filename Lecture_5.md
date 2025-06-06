@@ -48,7 +48,7 @@ $$
 $$
 D_{KL}(P||Q) = \sum_{x \in \mathcal{X}} P(x) \log_2 \frac{P(x)}{Q(x)}
 $$
-    （约定 $$0 \log_2 \frac{0}{q} = 0$$ 和 $$p \log_2 \frac{p}{0} = \infty$$ 若 $$p>0, q=0$$）
+（约定 $$0 \log_2 \frac{0}{q} = 0$$ 和 $$p \log_2 \frac{p}{0} = \infty$$ 若 $$p>0, q=0$$）
 -   **物理含义（从编码角度）**：
     -   如果我们知道信源的真实概率分布 $$P$$，那么最短的平均码长是其熵 $$H(P)$$。
     -   如果我们不知道真实分布 $$P$$，而是使用一个估计的或近似的分布 $$Q$$ 来设计编码（例如，码长 $$l(x) = \log_2 \frac{1}{Q(x)}$$），那么编码的实际平均码长将是 $$\sum_{x} P(x) \log_2 \frac{1}{Q(x)}$$。
@@ -79,11 +79,11 @@ $$
 $$
 TV(P,Q) \le \sqrt{\frac{1}{2 \ln 2} D_{KL}(P||Q)}
 $$
-    或者等价地：
+或者等价地：
 $$
 D_{KL}(P||Q) \ge 2 \ln 2 \cdot (TV(P,Q))^2 = \frac{\ln 2}{2} ||P-Q||_1^2
 $$
-    这意味着如果KL散度很小，那么L1范数（以及总变差距离）也很小。然而，反之不一定成立，特别是当某个 $$Q_i=0$$ 而 $$P_i > 0$$ 时，KL散度为无穷大，但L1范数可能仍然有限。KL散度对分布尾部的差异或 $$Q_i \approx 0$$ 的情况更为敏感。
+这意味着如果KL散度很小，那么L1范数（以及总变差距离）也很小。然而，反之不一定成立，特别是当某个 $$Q_i=0$$ 而 $$P_i > 0$$ 时，KL散度为无穷大，但L1范数可能仍然有限。KL散度对分布尾部的差异或 $$Q_i \approx 0$$ 的情况更为敏感。
 
 ### 2. 学生讨论与Reduction思路 (关于KL散度的性质)
 
@@ -93,13 +93,13 @@ $$
 $$
 ||P-Q||_1 = \sum_{i, P_i \ge Q_i} (P_i - Q_i) + \sum_{i, P_i < Q_i} (Q_i - P_i)
 $$
-        由于 $$\sum P_i = 1$$ 和 $$\sum Q_i = 1$$，所以 $$\sum (P_i - Q_i) = 0$$。
-        因此，$$\sum_{i, P_i \ge Q_i} (P_i - Q_i) = -\sum_{i, P_i < Q_i} (P_i - Q_i) = \sum_{i, P_i < Q_i} (Q_i - P_i)$$。
-        所以 $$||P-Q||_1 = 2 \sum_{i, P_i \ge Q_i} (P_i - Q_i)$$。
-        学生提出的 $$\tilde{P}$$ 和 $$\tilde{Q}$$ 构造意图可能是：
-        令 $$S_+ = \{i | P_i \ge Q_i\}$$，$$S_- = \{i | P_i < Q_i\}$$。
-        $$\tilde{P}_1 = \sum_{i \in S_+} P_i, \tilde{P}_2 = \sum_{i \in S_-} P_i$$ (构成一个二元分布 $$(\tilde{P}_1, \tilde{P}_2)$$ )
-        $$\tilde{Q}_1 = \sum_{i \in S_+} Q_i, \tilde{Q}_2 = \sum_{i \in S_-} Q_i$$ (构成一个二元分布 $$(\tilde{Q}_1, \tilde{Q}_2)$$ )
+由于 $$\sum P_i = 1$$ 和 $$\sum Q_i = 1$$，所以 $$\sum (P_i - Q_i) = 0$$。
+因此，$$\sum_{i, P_i \ge Q_i} (P_i - Q_i) = -\sum_{i, P_i < Q_i} (P_i - Q_i) = \sum_{i, P_i < Q_i} (Q_i - P_i)$$。
+所以 $$||P-Q||_1 = 2 \sum_{i, P_i \ge Q_i} (P_i - Q_i)$$。
+学生提出的 $$\tilde{P}$$ 和 $$\tilde{Q}$$ 构造意图可能是：
+令 $$S_+ = \{i | P_i \ge Q_i\}$$，$$S_- = \{i | P_i < Q_i\}$$。
+$$\tilde{P}_1 = \sum_{i \in S_+} P_i, \tilde{P}_2 = \sum_{i \in S_-} P_i$$ (构成一个二元分布 $$(\tilde{P}_1, \tilde{P}_2)$$ )
+$$\tilde{Q}_1 = \sum_{i \in S_+} Q_i, \tilde{Q}_2 = \sum_{i \in S_-} Q_i$$ (构成一个二元分布 $$(\tilde{Q}_1, \tilde{Q}_2)$$ )
 >        *(助教笔记中指出，教师似乎意在引导学生思考这种 "lumping" 操作对KL散度的影响。)*
 -   **教师提问**：在这样的reduction（数据处理或聚合）下，$$D_{KL}(P||Q)$$ 会如何变化？
 -   **结论**：会变小或不变。这与KL散度的**数据处理不等式 (Data Processing Inequality for KL Divergence)** 有关。如果我们将原始随机变量 $$X \sim P$$ (或 $$Q$$) 通过一个确定的函数（或随机映射，即一个信道）映射到新的随机变量 $$Y = g(X)$$，得到新的分布 $$P'$$ 和 $$Q'$$，那么 $$D_{KL}(P'||Q') \le D_{KL}(P||Q)$$。聚合操作是一种数据处理。

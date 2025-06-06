@@ -95,7 +95,7 @@ $$
 $$
 H(X,Y) = -\sum_{x,y} P(x,y) \log_2 P(x,y)
 $$
-    使用 $$P(x,y) = P(x)P(y|x)$$:
+使用 $$P(x,y) = P(x)P(y|x)$$:
 $$
 H(X,Y) = -\sum_{x,y} P(x,y) \log_2 (P(x)P(y|x))
 $$
@@ -105,12 +105,12 @@ $$
 $$
 = -\sum_{x,y} P(x,y) \log_2 P(x) - \sum_{x,y} P(x,y) \log_2 P(y|x)
 $$
-    对于第一项: $$\sum_{x,y} P(x,y) \log_2 P(x) = \sum_x (\sum_y P(x,y)) \log_2 P(x) = \sum_x P(x) \log_2 P(x) = -H(X)$$
-    对于第二项: $$\sum_{x,y} P(x,y) \log_2 P(y|x) = \sum_x P(x) \sum_y P(y|x) \log_2 P(y|x)$$
+对于第一项: $$\sum_{x,y} P(x,y) \log_2 P(x) = \sum_x (\sum_y P(x,y)) \log_2 P(x) = \sum_x P(x) \log_2 P(x) = -H(X)$$
+对于第二项: $$\sum_{x,y} P(x,y) \log_2 P(y|x) = \sum_x P(x) \sum_y P(y|x) \log_2 P(y|x)$$
 $$
 = \sum_x P(x) (-H(Y|X=x)) = -H(Y|X)
 $$
-    所以，$$H(X,Y) = H(X) + H(Y|X)$$。
+所以，$$H(X,Y) = H(X) + H(Y|X)$$。
 
 > *(老师要求同学们课后自行推导，此处给出推导过程。)*
 
@@ -297,17 +297,17 @@ $$
 $$
 -\sum_i p_i \log_2 p_i \le -\sum_i p_i \log_2 q_i
 $$
-    即 $$H(P) \le \sum_i p_i \log_2 \frac{1}{q_i}$$。
-    移项即得 $$D(P||Q) = \sum_i p_i \log_2 \frac{1}{q_i} - H(P) \ge 0$$。
-    证明吉布斯不等式可用琴生不等式，利用 $$\ln x \le x-1$$ (或 $$\log_2 x \le (x-1)/\ln 2$$):
+即 $$H(P) \le \sum_i p_i \log_2 \frac{1}{q_i}$$。
+移项即得 $$D(P||Q) = \sum_i p_i \log_2 \frac{1}{q_i} - H(P) \ge 0$$。
+证明吉布斯不等式可用琴生不等式，利用 $$\ln x \le x-1$$ (或 $$\log_2 x \le (x-1)/\ln 2$$):
 $$
 D(P||Q) = \sum_i p_i \log_2 \frac{p_i}{q_i} = -\sum_i p_i \log_2 \frac{q_i}{p_i}
 $$
 $$
 = -\frac{1}{\ln 2} \sum_i p_i \ln \frac{q_i}{p_i}
 $$
-    $$\ge -\frac{1}{\ln 2} \sum_i p_i \left( \frac{q_i}{p_i} - 1 \right)$$  (因为 $$\ln x \le x-1$$)
-    $$= -\frac{1}{\ln 2} \sum_i (q_i - p_i) = -\frac{1}{\ln 2} (\sum_i q_i - \sum_i p_i) = -\frac{1}{\ln 2} (1 - 1) = 0$$.
+$$\ge -\frac{1}{\ln 2} \sum_i p_i \left( \frac{q_i}{p_i} - 1 \right)$$  (因为 $$\ln x \le x-1$$)
+$$= -\frac{1}{\ln 2} \sum_i (q_i - p_i) = -\frac{1}{\ln 2} (\sum_i q_i - \sum_i p_i) = -\frac{1}{\ln 2} (1 - 1) = 0$$.
 -   **非对称性**: KL 散度不是一个严格意义上的距离度量，因为它不具有对称性，即通常情况下 $$D(P||Q) \neq D(Q||P)$$。这从其定义（哪个是真实分布 $$P$$，哪个是估计分布 $$Q$$）和物理意义中可以理解。
 
 ### 4. KL 散度的根本性:
@@ -368,8 +368,8 @@ $$
 $$
 ||P-Q||_1 = \sum_i |p_i - q_i|
 $$
-        总变差距离定义为 $$TV(P,Q) = \frac{1}{2} \sum_i |p_i - q_i| = \frac{1}{2} ||P-Q||_1$$。
-    -   **$$L_2$$ 范数距离 (欧氏距离的平方根)**:
+总变差距离定义为 $$TV(P,Q) = \frac{1}{2} \sum_i |p_i - q_i| = \frac{1}{2} ||P-Q||_1$$。
+-   **$$L_2$$ 范数距离 (欧氏距离的平方根)**:
 $$
 ||P-Q||_2 = \sqrt{\sum_i (p_i - q_i)^2}
 $$
@@ -379,17 +379,17 @@ $$
 $$
 TV(P,Q)^2 \le \frac{1}{2 \ln 2} D(P||Q)
 $$
-        或者写为：
+或者写为：
 $$
 D(P||Q) \ge 2 (\ln 2) \cdot TV(P,Q)^2
 $$
-        这意味着如果 KL 散度很小，那么总变差距离也很小。反之不一定成立（总变差小不一定KL散度小，特别是当某个 $$q_i=0$$ 而 $$p_i > 0$$ 时，KL散度为无穷大，但总变差可能有限）。
-        使用 $$||P-Q||_1 = 2 \cdot TV(P,Q)$$，则
+这意味着如果 KL 散度很小，那么总变差距离也很小。反之不一定成立（总变差小不一定KL散度小，特别是当某个 $$q_i=0$$ 而 $$p_i > 0$$ 时，KL散度为无穷大，但总变差可能有限）。
+使用 $$||P-Q||_1 = 2 \cdot TV(P,Q)$$，则
 $$
 D(P||Q) \ge \frac{\ln 2}{2} ||P-Q||_1^2
 $$
-    -   **对于二元分布 ($$n=2$$)**:
-        令 $$P=(p, 1-p)$$ 和 $$Q=(q, 1-q)$$。
+-   **对于二元分布 ($$n=2$$)**:
+    令 $$P=(p, 1-p)$$ 和 $$Q=(q, 1-q)$$。
 $$
 D(P||Q) = p \log_2 \frac{p}{q} + (1-p) \log_2 \frac{1-p}{1-q}
 $$
@@ -399,12 +399,12 @@ $$
 $$
 ||P-Q||_2^2 = (p-q)^2 + ((1-p)-(1-q))^2 = 2(p-q)^2 \implies ||P-Q||_2 = \sqrt{2}|p-q|
 $$
-        Pinsker 不等式在此情况下变为：
+Pinsker 不等式在此情况下变为：
 $$
 D(P||Q) \ge \frac{\ln 2}{2} (2|p-q|)^2 = 2 \ln 2 \cdot (p-q)^2
 $$
-        也可以找到 $$D(P||Q)$$ 与 $$(p-q)^2$$ 的其他界限，例如对于 $$|p-q|$$ 较小时，泰勒展开可得 $$D(P||Q) \approx \frac{1}{2 \ln 2} (\frac{(p-q)^2}{q(1-q)})$$.
-    -   总的来说，KL 散度对分布的尾部差异或某个 $$q_i \approx 0$$ 的情况比 $$L_1$$ 或 $$L_2$$ 距离更敏感。
+也可以找到 $$D(P||Q)$$ 与 $$(p-q)^2$$ 的其他界限，例如对于 $$|p-q|$$ 较小时，泰勒展开可得 $$D(P||Q) \approx \frac{1}{2 \ln 2} (\frac{(p-q)^2}{q(1-q)})$$.
+-   总的来说，KL 散度对分布的尾部差异或某个 $$q_i \approx 0$$ 的情况比 $$L_1$$ 或 $$L_2$$ 距离更敏感。
 
 ---
 
