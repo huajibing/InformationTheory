@@ -62,9 +62,9 @@ $$
 *   **设定:** $$(X_1, Y_1), (X_2, Y_2), \dots, (X_n, Y_n)$$ 为 i.i.d. 的随机变量对序列，每对服从联合分布 $$P(x,y)$$。其联合熵为 $$H(X,Y)$$，边缘熵为 $$H(X), H(Y)$$。
 *   ***联合典型集 $$A_{\epsilon}^{(n)}(X,Y)$$:**
     一个序列对 $$(x^n, y^n)$$ 被称为*联合 $$\epsilon$$"`-典型*，如果它同时满足：
-    1.  `$$P(x^n) \approx 2^{-nH(X)}$$ (即 `$$\left| -\frac{1}{n}\log_2 P(x^n) - H(X) \right| \le \epsilon$$`)
-    2.  $$P(y^n) \approx 2^{-nH(Y)}$$ (即 `$$\left| -\frac{1}{n}\log_2 P(y^n) - H(Y) \right| \le \epsilon$$`)
-    3.  $$P(x^n, y^n) \approx 2^{-nH(X,Y)}$$ (即 `$$\left| -\frac{1}{n}\log_2 P(x^n, y^n) - H(X,Y) \right| \le \epsilon$$`)
+    1.  $$P(x^n) \approx 2^{-nH(X)}$$ (即 `$$\left| -\frac{1}{n}\log_2 P(x^n) - H(X) \right| \le \epsilon$$)
+    2.  $$P(y^n) \approx 2^{-nH(Y)}$$ (即 $$\left| -\frac{1}{n}\log_2 P(y^n) - H(Y) \right| \le \epsilon$$)
+    3.  $$P(x^n, y^n) \approx 2^{-nH(X,Y)}$$ (即 $$\left| -\frac{1}{n}\log_2 P(x^n, y^n) - H(X,Y) \right| \le \epsilon$$)
     (注：严格定义中，有时仅用第3条，前两条可由第3条导出。但同时列出更清晰。)
 *   **联合典型集的性质 (对于足够大的 $$n$$)：**
     1.  **概率集中性:** 随机产生的序列对 $$(X^n, Y^n)$$ 属于联合典型集的概率趋近于1。

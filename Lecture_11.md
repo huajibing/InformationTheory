@@ -64,7 +64,7 @@
 为了严格证明香农编码定理，我们需要一系列数学工具。首先引入和推导的是渐进均分割特性 (AEP)。
 
 ### 1. 预备知识：大数定律 (Law of Large Numbers, LLN)
-*   **基本形式：** 设 $$X_1, X_2, \dots, X_n, \dots$$ 是一系列*独立同分布 (Independent and Identically Distributed, i.i.d.)* 的随机变量，具有共同的期望 $$E[X]$$。它们的前 $$n$$ 个随机变量的样本均值 `$$\bar{X}_n = \frac{1}{n}\sum_{i=1}^{n} X_i$$` 会随着 $$n \rightarrow \infty$$ *依概率收敛 (converges in probability)* 到期望 $$E[X]$$。
+*   **基本形式：** 设 $$X_1, X_2, \dots, X_n, \dots$$ 是一系列*独立同分布 (Independent and Identically Distributed, i.i.d.)* 的随机变量，具有共同的期望 $$E[X]$$。它们的前 $$n$$ 个随机变量的样本均值 $$\bar{X}_n = \frac{1}{n}\sum_{i=1}^{n} X_i$$ 会随着 $$n \rightarrow \infty$$ *依概率收敛 (converges in probability)* 到期望 $$E[X]$$。
 $$
 \bar{X}_n = \frac{1}{n} \sum_{i=1}^{n} X_i \xrightarrow{p} E[X] \quad (\text{as } n \to \infty)
 $$
@@ -121,7 +121,7 @@ $$
 *   **核心思想：** 对于一个足够长的 i.i.d. 序列 $$(X_1, \dots, X_n)$$，其经验熵 (empirical entropy) $$-\frac{1}{n}\log P(X_1, \dots, X_n)$$ 以极高的概率接近于该随机过程的真实熵 $$H(X)$$。换句话说，序列 $$(X_1, \dots, X_n)$$ 的概率 $$P(X_1, \dots, X_n)$$ 极有可能约等于 $$2^{-nH(X)}$$。
 
 ### 3. 典型集 $$A_{\epsilon}^{(n)}$$ (Typical Set)
-*   基于 AEP，对于任意 $$\epsilon > 0$$，当 $$n$$ 足够大时，事件 `$$\left| -\frac{1}{n} \log P(x_1, \dots, x_n) - H(X) \right| < \epsilon$$` 以接近1的概率发生。
+*   基于 AEP，对于任意 $$\epsilon > 0$$，当 $$n$$ 足够大时，事件 $$\left| -\frac{1}{n} \log P(x_1, \dots, x_n) - H(X) \right| < \epsilon$$ 以接近1的概率发生。
 *   上述不等式可以改写为：
 $$
 H(X) - \epsilon < -\frac{1}{n} \log P(x_1, \dots, x_n) < H(X) + \epsilon
@@ -148,7 +148,7 @@ $$
 $$
 Pr((X_1, \dots, X_n) \in A_{\epsilon}^{(n)}) > 1 - \delta \quad (\text{for any } \delta > 0, \text{ if } n \text{ is large enough})
 $$
-        因此，非典型集 `$$A_{\epsilon}^{(n)c} = \mathcal{X}^n \setminus A_{\epsilon}^{(n)}$$` 的总概率接近于0：
+        因此，非典型集 $$A_{\epsilon}^{(n)c} = \mathcal{X}^n \setminus A_{\epsilon}^{(n)}$$ 的总概率接近于0：
 $$
 Pr((X_1, \dots, X_n) \in A_{\epsilon}^{(n)c}) < \delta
 $$
@@ -156,16 +156,16 @@ $$
     3.  **典型集的大小 (Size of the Typical Set) $$\|A_{\epsilon}^{(n)}\|$$：**
         *   因为典型集 $$A_{\epsilon}^{(n)}$$ 的总概率 $$Pr(A_{\epsilon}^{(n)}) \approx 1$$，并且其中每个序列的概率 $$P(x^n) \approx 2^{-nH(X)}$$。
         *   如果我们将典型集中的所有序列都近似看作是等概率的（概率为 $$2^{-nH(X)}$$），那么典型集的大小（序列个数）乘以单个序列的概率应该近似等于1。
-        *   所以， `$$\|A_{\epsilon}^{(n)}\| \times 2^{-nH(X)} \approx 1 $$`
+        *   所以， $$\|A_{\epsilon}^{(n)}\| \times 2^{-nH(X)} \approx 1 $$
         *   因此，典型集 $$A_{\epsilon}^{(n)}$$ 中大约有 $$2^{nH(X)}$$ 个序列。
         *   更精确的界限是：
 $$
 (1-\delta) 2^{n(H(X)-\epsilon')} \le |A_{\epsilon}^{(n)}| \le 2^{n(H(X)+\epsilon')}
 $$
-            对于大的 $$n$$，通常简写为 `$$\|A_{\epsilon}^{(n)}\| \approx 2^{nH(X)}$$`。
+            对于大的 $$n$$，通常简写为 $$\|A_{\epsilon}^{(n)}\| \approx 2^{nH(X)}$$。
 
 ### 4. AEP 核心思想总结 ("Asymptotic Equipartition")
-    1.  **概率集中性：** 对于长的 i.i.d. 序列，几乎所有的概率质量都集中在典型集 $$A_{\epsilon}^{(n)}$$ 中。非典型集 $$A_{\epsilon}^{(n)c}$$ 虽然可能包含数量上远超 $$A_{\epsilon}^{(n)}$$ 的序列 (如果 `$$\|\mathcal{X}\|^n$$` 远大于 $$2^{nH(X)}$$)，但其总概率却趋近于0。我们主要关注典型集。
+    1.  **概率集中性：** 对于长的 i.i.d. 序列，几乎所有的概率质量都集中在典型集 $$A_{\epsilon}^{(n)}$$ 中。非典型集 $$A_{\epsilon}^{(n)c}$$ 虽然可能包含数量上远超 $$A_{\epsilon}^{(n)}$$ 的序列 (如果 $$\|\mathcal{X}\|^n$$ 远大于 $$2^{nH(X)}$$)，但其总概率却趋近于0。我们主要关注典型集。
     2.  **概率均分性：** 在典型集 $$A_{\epsilon}^{(n)}$$ 内部，所有序列的概率几乎是均等的，都约等于 $$2^{-nH(X)}$$。这就是“均分割” (Equipartition) 的含义。
 *   **伯努利例子：** 考虑一个伯努利随机变量 $$X \sim \text{Bernoulli}(p)$$, 例如 $$P(X=1)=p=0.4, P(X=0)=1-p=0.6$$。其熵为 $$H(X) = H_b(0.4)$$。
     如果抛掷这个非均匀硬币 $$n=10000$$ 次，得到序列 $$(X_1, \dots, X_{10000})$$。
@@ -195,7 +195,7 @@ $$(X_1, Y_1), (X_2, Y_2), \dots, (X_n, Y_n)$$，每一对都服从联合分布 $
     > ```latex
     > \left| -\frac{1}{n}\log P(x^n) - H(X) \right| < \epsilon \quad \left(\text{i.e., } P(x^n) \approx 2^{-nH(X)}\right)
     > ```
-2.  `$$y^n$$ 序列关于其边缘分布 $$P(Y)$$ 是 $$\epsilon$$"`-典型的：
+2.  $$y^n$$ 序列关于其边缘分布 $$P(Y)$$ 是 $$\epsilon$$"`-典型的：
     > ```latex
     > \left| -\frac{1}{n}\log P(y^n) - H(Y) \right| < \epsilon \quad \left(\text{i.e., } P(y^n) \approx 2^{-nH(Y)}\right)
     > ```
@@ -221,7 +221,7 @@ $$
 ### 5. 直观理解与重要推论 (老师图示解释)
 *   我们可以将所有可能的 $$X^n$$ 序列想象成一个大集合，其中包含约 $$2^{nH(X)}$$ 个 $$X$$-典型序列。类似地，所有可能的 $$Y^n$$ 序列集合中包含约 $$2^{nH(Y)}$$ 个 $$Y$$-典型序列。
 *   如果 $$X$$ 和 $$Y$$ 是独立的，那么 $$H(X,Y) = H(X) + H(Y)$$。此时，联合典型序列对的数量就是 $$X$$-典型序列数量与 $$Y$$-典型序列数量的乘积，即 $$2^{n(H(X)+H(Y))}$$。
-*   但一般情况下 $$X$$ 和 $$Y$$ 不是独立的 (例如在信道中 $$Y$$ 依赖于 $$X$$)，此时 $$H(X,Y) < H(X) + H(Y)$$。这意味着联合典型序列对的数量 $$2^{nH(X,Y)}$$ 通常远小于 $$X$$-典型序列和 $$Y$$-典型序列数量的简单乘积 `$$2^{nH(X)} \cdot 2^{nH(Y)}$$`。
+*   但一般情况下 $$X$$ 和 $$Y$$ 不是独立的 (例如在信道中 $$Y$$ 依赖于 $$X$$)，此时 $$H(X,Y) < H(X) + H(Y)$$。这意味着联合典型序列对的数量 $$2^{nH(X,Y)}$$ 通常远小于 $$X$$-典型序列和 $$Y$$-典型序列数量的简单乘积 `$$2^{nH(X)} \cdot 2^{nH(Y)}$$。
 *   这表明，即使 $$x^n$$ 是 $$X$$-典型的，并且 $$y^n$$ 是 $$Y$$-典型的，它们组成的对 $$(x^n, y^n)$$ 未必是联合典型的。只有一小部分这样的对是联合典型的。
 
 *   **关键推论：给定一个 $$X$$-典型序列 $$x^n \in A_{\epsilon}^{(n)}(X)$$, 有多少个 $$Y^n$$ 序列与之构成联合典型对？**
@@ -243,8 +243,8 @@ $$
 本节课作为证明香农信道编码定理的重要铺垫，详细阐述了以下核心内容：
 1.  **回顾了信道编码定理的操作性描述和信道容量的定义**，明确了它们在可靠通信中的核心地位。
 2.  **深入推导了渐进均分割特性 (AEP)**：从大数定律出发，通过选择特定函数 $$g(x) = -\log p(x)$$，证明了长 i.i.d. 序列的*经验熵*依概率收敛于真实熵 $$H(X)$$。
-3.  **定义并分析了典型集 $$A_{\epsilon}^{(n)}$$**：探讨了典型序列的概率特性 ($$P(x^n) \approx 2^{-nH(X)}$$)、典型集的总概率 ($$Pr(A_{\epsilon}^{(n)}) \approx 1$$) 以及典型集的大小 (`$$\|A_{\epsilon}^{(n)}\| \approx 2^{nH(X)}$$`)。AEP 的核心是*概率质量集中*在这些近似等概率的典型序列上。
-4.  **引入了联合渐进均分割特性 (Joint AEP)**：定义了联合典型集 $$A_{\epsilon}^{(n)}(X,Y)$$ 及其性质，特别是其大小 `$$\|A_{\epsilon}^{(n)}(X,Y)\| \approx 2^{nH(X,Y)}$$`。
+3.  **定义并分析了典型集 $$A_{\epsilon}^{(n)}$$**：探讨了典型序列的概率特性 ($$P(x^n) \approx 2^{-nH(X)}$$)、典型集的总概率 ($$Pr(A_{\epsilon}^{(n)}) \approx 1$$) 以及典型集的大小 ($$\|A_{\epsilon}^{(n)}\| \approx 2^{nH(X)}$$)。AEP 的核心是*概率质量集中*在这些近似等概率的典型序列上。
+4.  **引入了联合渐进均分割特性 (Joint AEP)**：定义了联合典型集 $$A_{\epsilon}^{(n)}(X,Y)$$ 及其性质，特别是其大小 $$\|A_{\epsilon}^{(n)}(X,Y)\| \approx 2^{nH(X,Y)}$$。
 5.  **解释了Joint AEP的直观含义**：强调了对于给定的典型 $$x^n$$，与之联合典型的 $$y^n$$ 序列数量级为 $$2^{nH(Y|X)}$$。
 
 这些概念，尤其是典型集和联合典型集的性质，是理解信道编码定理证明中“随机编码法”和错误概率分析的基础。

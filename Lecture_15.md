@@ -92,7 +92,7 @@ $$
     >   这个定理描述了素数的分布密度，保证了在需要时（如随机化协议中）可以找到足够大的素数。
     *   ***哥德巴赫猜想 (Goldbach Conjecture)***:
     >   $$\exists n_1, n_2$$ prime`
-    >   `$$m = n_1 + n_2$$
+    >   $$m = n_1 + n_2$$
     >   $$m$$ is even`
     >   (任何一个大于2的偶数都可以表示为两个素数之和)。
 *   教师提到陈景润在哥德巴赫猜想上的贡献（证明了“1+2”，即任何一个充分大的偶数都可以表示为一个素数与一个至多是两个素数乘积之和）。
@@ -127,7 +127,7 @@ $$
 *   > **(教师板书)**
     > *   `Max Entropy.`
 *   **问题设定**:
-    *   假设有一个 $$d$$ 维随机向量 (d-dim random vector) `$$X = (X_1, \dots, X_d)^T$$。
+    *   假设有一个 $$d$$ 维随机向量 (d-dim random vector) $$X = (X_1, \dots, X_d)^T$$。
     *   我们已知关于这个随机向量的一些***部分信息 (partial information)***，通常体现为某些期望值的约束。例如：
         1.  它的***均值 (mean)***: $$E[X] = \vec{\mu}$$ (通常为了简化，会假设 $$\vec{\mu} = \vec{0}$$，如果不是零向量，可以通过平移 $$X' = X - \vec{\mu}$$ 来处理)。
         2.  它的***协方差矩阵 (covariance matrix)***: $$Cov(X) = E[(X-E[X])(X-E[X])^T] = \Sigma$$。
@@ -146,8 +146,8 @@ $$
 *   **定理**: 对于 $$d$$ 维随机向量 $$X$$，在给定均值 $$E[X]=\vec{\mu}$$ 和协方差矩阵 $$Cov(X)=\Sigma$$ (其中 $$\Sigma$$ 是正定矩阵) 的条件下，使得其***微分熵 (differential entropy)*** $$h(X)$$ 最大的分布是***多维高斯分布 (Multivariate Gaussian distribution)***，即 $$X \sim N(\vec{\mu}, \Sigma)$$。
 *   > **(教师板书 - 以均值为0为例)**:
     > *   `X d-dim random vector`
-    > *   `E[X] = $$\vec{0}$$`
-    > *   `Cov(X) = $$\Sigma$$` (旁边有 $$E[XX^T]$$)
+    > *   `E[X] = $$\vec{0}$$
+    > *   `Cov(X) = $$\Sigma$$ (旁边有 $$E[XX^T]$$)
     > *   `Max Entropy distribution is $$N(\vec{0}, \Sigma)$$` (教师写为 `Th` (Theorem) $$N(0, \Sigma)$$)
 
 ### 3.3 最大熵原理的证明 (多维高斯情况)
