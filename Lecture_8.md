@@ -53,9 +53,9 @@
 $$
 \epsilon' = P(\text{2 errors}) + P(\text{3 errors}) = \binom{3}{2}\epsilon^2(1-\epsilon) + \binom{3}{3}\epsilon^3 = 3\epsilon^2(1-\epsilon) + \epsilon^3
 $$
-            若 $$\epsilon = 0.1$$, $$\epsilon' = 3(0.01)(0.9) + 0.001 = 0.027 + 0.001 = 0.028 < 0.1$$。
-        > **(板书)**: `ε = 0.1 -> ε' < ε`
-    *   理论上，当重复次数 $$n \rightarrow \infty$$，$$\epsilon' \rightarrow 0$$ (如果 $$\epsilon < 1/2$$)。
+若 $$\epsilon = 0.1$$, $$\epsilon' = 3(0.01)(0.9) + 0.001 = 0.027 + 0.001 = 0.028 < 0.1$$。
+> **(板书)**: `ε = 0.1 -> ε' < ε`
+*   理论上，当重复次数 $$n \rightarrow \infty$$，$$\epsilon' \rightarrow 0$$ (如果 $$\epsilon < 1/2$$)。
 
 ### 4. 信道编码的核心权衡：可靠性 vs. 效率
 *   **效率 (Efficiency)**
@@ -74,8 +74,8 @@ $$
 $$
 d_H(C_i, C_j) \ge 2t+1
 $$
-            > **(板书)**: `d_H(C_i, C_j) >= 2t+1 (bits) (correct t bit error)`
-        *   **解释**: 以每个码字 $$C_k$$ 为中心，半径为 $$t$$ 的汉明球（包含所有与 $$C_k$$ 距离 $$\le t$$ 的 $$n$$ 比特序列）必须互不相交。这样，当接收到的序列落在某个球内时，可以唯一地解码为该球的球心码字，从而纠正了 $$\le t$$ 个错误。
+> **(板书)**: `d_H(C_i, C_j) >= 2t+1 (bits) (correct t bit error)`
+*   **解释**: 以每个码字 $$C_k$$ 为中心，半径为 $$t$$ 的汉明球（包含所有与 $$C_k$$ 距离 $$\le t$$ 的 $$n$$ 比特序列）必须互不相交。这样，当接收到的序列落在某个球内时，可以唯一地解码为该球的球心码字，从而纠正了 $$\le t$$ 个错误。
 
 ---
 
@@ -92,15 +92,15 @@ $$
 $$
 2^m \sum_{i=0}^{t} \binom{n}{i} \le 2^n
 $$
-    或者改写为对 $$m$$ 的上界或对 $$n$$ 的下界：
+或者改写为对 $$m$$ 的上界或对 $$n$$ 的下界：
 $$
 m \le n - \log_2 \left( \sum_{i=0}^{t} \binom{n}{i} \right)
 $$
 $$
 n \ge m + \log_2 \left( \sum_{i=0}^{t} \binom{n}{i} \right)
 $$
-    > **(板书 Part 1)**: `Sphere packing bound.`
-    > **(板书 Part 1)**: `[Sum_{i=0 to t} (n choose i)] * 2^m <= 2^n` (教授写的是这个形式)
+> **(板书 Part 1)**: `Sphere packing bound.`
+> **(板书 Part 1)**: `[Sum_{i=0 to t} (n choose i)] * 2^m <= 2^n` (教授写的是这个形式)
 *   **意义**: 此界表明，为了达到一定的纠错能力和信息承载量，码长 $$n$$ 不能太短，即码率 $$R=m/n$$ 有一个上限。这是一个关于码性能极限的理论界限，但未给出构造方法。
 
 ### 2. 上界 (Upper Bound) - 存在性界
@@ -133,26 +133,26 @@ $$
 $$
 P(d_H(C_i, C_j) < \delta n) < e^{-n D(\delta || 1/2)} = e^{-n (\delta \log_2\frac{\delta}{1/2} + (1-\delta)\log_2\frac{1-\delta}{1/2})} = e^{-n(\delta \log_2(2\delta) + (1-\delta)\log_2(2(1-\delta)))}
 $$
-            对于 $$\delta < 1/2$$，这是一个指数衰减的概率，可以简写为 $$e^{-c_1(\delta)n}$$ 或 $$e^{-O(n)}$$，其中常数依赖于 $$\delta$$ 与 $$1/2$$ 的差距。
-            > **(板书 Part 3)**: `Chernoff bound.`
-            > **(板书 Part 3)**: $$P(d_H(C_i, C_j) < \delta n) < e^{-O(n)}$$
+对于 $$\delta < 1/2$$，这是一个指数衰减的概率，可以简写为 $$e^{-c_1(\delta)n}$$ 或 $$e^{-O(n)}$$，其中常数依赖于 $$\delta$$ 与 $$1/2$$ 的差距。
+> **(板书 Part 3)**: `Chernoff bound.`
+> **(板书 Part 3)**: $$P(d_H(C_i, C_j) < \delta n) < e^{-O(n)}$$
 
-    *   ***联合界 (Union Bound)***
-        *   我们关心的是是否存在 *任何一对* $$(i,j)$$ 距离过近。
-        *   总的坏事件概率：
-            $$P_{bad} = P(\exists (i \ne j) \text{ s.t. } d_H(C_i, C_j) < \delta n) \le \sum_{i \ne j} P(d_H(C_i, C_j) < \delta n)$$
-        *   码字对的数量为 $$\binom{2^m}{2} = \frac{2^m(2^m-1)}{2} < \frac{(2^m)^2}{2} = 2^{2m-1}$$。
-        *   所以，$$P_{bad} < \binom{2^m}{2} \cdot e^{-O(n)} \approx 2^{2m-1} \cdot e^{-O(n)}$$。
-            > **(板书 Part 3)**: $$P(\exists (i \ne j) \text{ s.t. } d_H(C_i, C_j) < \delta n) < \sum_{i \ne j} P(d_H(C_i, C_j) < \delta n)$$
-            > **(板书 Part 3)**: `< \binom{2^m}{2} \cdot e^{-O(n)}$$ (教授口述约为 $$2^{2m} \cdot e^{-O(n)}$$)
+*   ***联合界 (Union Bound)***
+    *   我们关心的是是否存在 *任何一对* $$(i,j)$$ 距离过近。
+    *   总的坏事件概率：
+        $$P_{bad} = P(\exists (i \ne j) \text{ s.t. } d_H(C_i, C_j) < \delta n) \le \sum_{i \ne j} P(d_H(C_i, C_j) < \delta n)$$
+    *   码字对的数量为 $$\binom{2^m}{2} = \frac{2^m(2^m-1)}{2} < \frac{(2^m)^2}{2} = 2^{2m-1}$$。
+    *   所以，$$P_{bad} < \binom{2^m}{2} \cdot e^{-O(n)} \approx 2^{2m-1} \cdot e^{-O(n)}$$。
+        > **(板书 Part 3)**: $$P(\exists (i \ne j) \text{ s.t. } d_H(C_i, C_j) < \delta n) < \sum_{i \ne j} P(d_H(C_i, C_j) < \delta n)$$
+        > **(板书 Part 3)**: `< \binom{2^m}{2} \cdot e^{-O(n)}$$ (教授口述约为 $$2^{2m} \cdot e^{-O(n)}$$)
 
-    *   **存在性条件**:
-        *   如果 $$P_{bad} < 1$$，即 $$\binom{2^m}{2} \cdot e^{-O(n)} < 1$$，则存在好码。
-        *   取对数 (自然对数)：$$\ln\left(\binom{2^m}{2}\right) - O(n) < 0$$。
-        *   $$\ln(2^{2m-1}) - O(n) < 0 \Rightarrow (2m-1)\ln 2 < O(n) \Rightarrow 2m \ln 2 < O(n)$$
-        *   这意味着 $$m < c_2(\delta) \cdot n$$ 对于某个常数 $$c_2(\delta)$$。
-        *   即码率 $$R = m/n$$ 必须小于某个常数 $$c_2(\delta)$$。
-            > **(板书 Part 3)**: $$^{(i)} \binom{2^m}{2} \cdot e^{-O(n)} < 1$$
+*   **存在性条件**:
+    *   如果 $$P_{bad} < 1$$，即 $$\binom{2^m}{2} \cdot e^{-O(n)} < 1$$，则存在好码。
+    *   取对数 (自然对数)：$$\ln\left(\binom{2^m}{2}\right) - O(n) < 0$$。
+    *   $$\ln(2^{2m-1}) - O(n) < 0 \Rightarrow (2m-1)\ln 2 < O(n) \Rightarrow 2m \ln 2 < O(n)$$
+    *   这意味着 $$m < c_2(\delta) \cdot n$$ 对于某个常数 $$c_2(\delta)$$。
+    *   即码率 $$R = m/n$$ 必须小于某个常数 $$c_2(\delta)$$。
+        > **(板书 Part 3)**: $$^{(i)} \binom{2^m}{2} \cdot e^{-O(n)} < 1$$
 
 *   ***Gilbert-Varshamov (GV) Bound (吉尔伯特-瓦尔沙莫夫界)***
     > **(板书 Part 3)**: `Gilbert-Varshamov bound.`
@@ -161,23 +161,25 @@ $$
 $$
 M \sum_{i=0}^{d-1} \binom{n}{i} \le 2^n
 $$
-        对于大的 $$n$$，这近似于 $$R \ge 1 - H_2(\delta_{GV})$$，其中 $$\delta_{GV} = d/n$$ 是相对距离，$$H_2(\cdot)$$ 是二进制熵函数。
-    *   教授给出的结论是定性的：`If $$R < c(\delta)$$ for some constant $$c$$ (depending on $$\delta$$), then $$\exists C_1, \ldots, C_{2^m}$$ such that $$d_H(C_i, C_j) \ge \delta n$$.`
+    对于大的 $$n$$，这近似于 $$R \ge 1 - H_2(\delta_{GV})$$，其中 $$\delta_{GV} = d/n$$ 是相对距离，$$H_2(\cdot)$$ 是二进制熵函数。
+*   教授给出的结论是定性的：If $$R < c(\delta)$$ for some constant $$c$$ (depending on $$\delta$$), then $$\exists C_1, \ldots, C_{2^m}$$ such that $$d_H(C_i, C_j) \ge \delta n$$.
 
 ---
 
 ## 三、纠错码的实际考量
 
 ### 1. 纠错码 (ECC) 的核心任务
-    1.  **设计码字 (Design codewords)**: 使得码字间汉明距离足够大以纠错。
-        > **(板书)**: `1) Design codewords $$C_1 \ldots C_M$$ such that $$d_H(C_i, C_j)$$ is large enough (to correct err).`
-    2.  **编码 (Encode)**: 将原始消息有效地映射到码字。
-        > **(板书)**: `2) Encode: message $$\rightarrow$$ codeword`
-    3.  **解码 (Decode)**: 将带噪的接收序列恢复到最可能的原始码字。
-        > **(板书)**: `3) Decode: received string $$\xrightarrow{noise}$$ codeword`
+
+1.  **设计码字 (Design codewords)**: 使得码字间汉明距离足够大以纠错。
+    > **(板书)**: `1) Design codewords $$C_1 \ldots C_M$$ such that $$d_H(C_i, C_j)$$ is large enough (to correct err).`
+2.  **编码 (Encode)**: 将原始消息有效地映射到码字。
+    > **(板书)**: `2) Encode: message $$\rightarrow$$ codeword`
+3.  **解码 (Decode)**: 将带噪的接收序列恢复到最可能的原始码字。
+    > **(板书)**: `3) Decode: received string $$\xrightarrow{noise}$$ codeword`
 
 ### 2. 计算效率 (Computational Efficiency) 的重要性
-    > **(板书)**: `* Computational Efficiency (Encoding / Decoding)`
+
+> **(板书)**: `* Computational Efficiency (Encoding / Decoding)`
 *   仅仅证明“好码”的存在是不够的，还需要高效的编解码算法。
 *   **挑战**:
     *   **编码**: 若只是一个 $$2^m \times n$$ 的巨大查找表，当 $$m$$ 很大时不可行。
