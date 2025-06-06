@@ -162,27 +162,27 @@ $$
     > *   `Then $$h(X) \le h(Y)$$`
 
 *   **证明过程 (利用KL散度)**:
-    1.  令 $$f_X(t)$$ 为随机向量 $$X$$ 的概率密度函数 (PDF)，$$f_Y(t)$$ 为随机向量 $$Y \sim N(\vec{0}, \Sigma)$$ 的 PDF。
-    2.  考虑 $$X$$ 和 $$Y$$ 之间的***KL散度 (Kullback-Leibler Divergence)*** 或相对熵 $$D(f_X || f_Y)$$ (简记为 $$D(X||Y)$$):
+1.  令 $$f_X(t)$$ 为随机向量 $$X$$ 的概率密度函数 (PDF)，$$f_Y(t)$$ 为随机向量 $$Y \sim N(\vec{0}, \Sigma)$$ 的 PDF。
+2.  考虑 $$X$$ 和 $$Y$$ 之间的***KL散度 (Kullback-Leibler Divergence)*** 或相对熵 $$D(f_X || f_Y)$$ (简记为 $$D(X||Y)$$):
 $$
 D(X||Y) = \int f_X(t) \log \frac{f_X(t)}{f_Y(t)} dt
 $$
 根据信息不等式 (Gibbs' inequality的连续版本)，我们知道 $$D(X||Y) \ge 0$$，等号成立当且仅当 $$f_X(t) = f_Y(t)$$ 几乎处处成立。
-3.  展开 KL 散度：
+1.  展开 KL 散度：
 $$
 D(X||Y) = \int f_X(t) \log f_X(t) dt - \int f_X(t) \log f_Y(t) dt
 $$
 $$
 D(X||Y) = -h(X) - \int f_X(t) \log f_Y(t) dt
 $$
-4.  由于 $$D(X||Y) \ge 0$$，我们有：
+1.  由于 $$D(X||Y) \ge 0$$，我们有：
 $$
 -h(X) - \int f_X(t) \log f_Y(t) dt \ge 0
 $$
 $$
 \implies h(X) \le - \int f_X(t) \log f_Y(t) dt
 $$
-5.  现在我们需要计算积分项 $$- \int f_X(t) \log f_Y(t) dt$$。
+1.  现在我们需要计算积分项 $$- \int f_X(t) \log f_Y(t) dt$$。
         多维高斯分布 $$Y \sim N(\vec{0}, \Sigma)$$ 的 PDF 为：
 $$
 f_Y(t) = \frac{1}{(2\pi)^{d/2} |\Sigma|^{1/2}} \exp\left(-\frac{1}{2} t^T \Sigma^{-1} t\right)
@@ -194,7 +194,7 @@ $$
 $$
 \ln f_Y(t) = -\frac{d}{2}\ln(2\pi) - \frac{1}{2}\ln|\Sigma| - \frac{1}{2} t^T \Sigma^{-1} t
 $$
-6.  计算积分 $$\int f_X(t) \ln f_Y(t) dt$$:
+1.  计算积分 $$\int f_X(t) \ln f_Y(t) dt$$:
 $$
 \int f_X(t) \ln f_Y(t) dt = \int f_X(t) \left[-\frac{d}{2}\ln(2\pi) - \frac{1}{2}\ln|\Sigma| - \frac{1}{2} t^T \Sigma^{-1} t\right] dt
 $$
@@ -205,7 +205,7 @@ $$
 $$
 = -\left(\frac{d}{2}\ln(2\pi) + \frac{1}{2}\ln|\Sigma|\right) - \frac{1}{2} E_X[t^T \Sigma^{-1} t]
 $$
-7.  计算 $$E_X[t^T \Sigma^{-1} t]$$:
+1.  计算 $$E_X[t^T \Sigma^{-1} t]$$:
     $$t^T \Sigma^{-1} t$$ 是一个标量，等于其迹 $$tr(t^T \Sigma^{-1} t)$$。
     利用迹的轮换不变性 $$tr(ABC) = tr(BCA) = tr(CAB)$$：
     $$tr(t^T \Sigma^{-1} t) = tr(\Sigma^{-1} t t^T)$$
@@ -215,7 +215,7 @@ $$
     因为 $$E[X] = \vec{0}$$，所以 $$Cov(X) = E[XX^T] = \Sigma$$。在此处，由于积分变量是 $$t$$ 代表 $$X$$ 的实现，所以 $$E_X[t t^T] = \Sigma$$。
     $$E_X[t^T \Sigma^{-1} t] = tr(\Sigma^{-1} \Sigma) = tr(I_d) = d$$
     (其中 $$I_d$$ 是 $$d \times d$$ 的单位矩阵)。
-8.  将 $$E_X[t^T \Sigma^{-1} t] = d$$ 代回第6步的积分结果：
+2.  将 $$E_X[t^T \Sigma^{-1} t] = d$$ 代回第6步的积分结果：
 $$
 \int f_X(t) \ln f_Y(t) dt = -\left(\frac{d}{2}\ln(2\pi) + \frac{1}{2}\ln|\Sigma|\right) - \frac{1}{2}d
 $$
@@ -227,7 +227,7 @@ $$
 = \frac{1}{2} \ln((2\pi)^d |\Sigma|) + \frac{d}{2}\ln(e) = \frac{1}{2} \ln((2\pi e)^d |\Sigma|)
 $$
 这正是多维高斯分布 $$Y \sim N(\vec{0}, \Sigma)$$ 的微分熵 $$h(Y)$$ 的表达式 (如果使用 $$\log_2$$，则为 $$\frac{1}{2} \log_2((2\pi e)^d |\Sigma|)$$ 比特)。
-9.  **结论**:
+1.  **结论**:
     我们已经证明了 $$- \int f_X(t) \ln f_Y(t) dt = h(Y)$$。
     代回第4步的不等式 $$h(X) \le - \int f_X(t) \ln f_Y(t) dt$$，得到：
 $$
