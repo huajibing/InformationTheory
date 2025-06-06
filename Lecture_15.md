@@ -19,7 +19,7 @@
 $$
 f_{EQ}(x,y) = \begin{cases} 1 & \text{if } x=y \\ 0 & \text{if } x \neq y \end{cases}
 $$
-    确定性协议的通信复杂度为 $$n$$ 比特。
+确定性协议的通信复杂度为 $$n$$ 比特。
 
 *   **随机化协议流程**:
     0.  **(预备阶段 - Alice 和 Bob 共同约定)**:
@@ -62,12 +62,12 @@ $$
 $$
 P(\text{error}) \le \frac{\text{number of roots of } h(Z) \text{ in } \mathbb{Z}_p}{p} \le \frac{n-1}{p}
 $$
-    *   如果选择 $$p \approx n^{100}$$ (一个非常大的素数)，那么：
+*   如果选择 $$p \approx n^{100}$$ (一个非常大的素数)，那么：
 $$
 P(\text{error}) \le \frac{n-1}{n^{100}} \approx \frac{n}{n^{100}} = \frac{1}{n^{99}}
 $$
-        这是一个非常小的概率，随着 $$n$$ 的增大而迅速趋向于0。
-    *   因此，该随机化协议是***高概率正确 (high probability correct)*** 的。
+这是一个非常小的概率，随着 $$n$$ 的增大而迅速趋向于0。
+*   因此，该随机化协议是***高概率正确 (high probability correct)*** 的。
 
 *   **正确性分析 - 完整**:
     *   **Case 1: $$x = y$$**
@@ -167,73 +167,73 @@ $$
 $$
 D(X||Y) = \int f_X(t) \log \frac{f_X(t)}{f_Y(t)} dt
 $$
-        根据信息不等式 (Gibbs' inequality的连续版本)，我们知道 $$D(X||Y) \ge 0$$，等号成立当且仅当 $$f_X(t) = f_Y(t)$$ 几乎处处成立。
-    3.  展开 KL 散度：
+根据信息不等式 (Gibbs' inequality的连续版本)，我们知道 $$D(X||Y) \ge 0$$，等号成立当且仅当 $$f_X(t) = f_Y(t)$$ 几乎处处成立。
+3.  展开 KL 散度：
 $$
 D(X||Y) = \int f_X(t) \log f_X(t) dt - \int f_X(t) \log f_Y(t) dt
 $$
 $$
 D(X||Y) = -h(X) - \int f_X(t) \log f_Y(t) dt
 $$
-    4.  由于 $$D(X||Y) \ge 0$$，我们有：
+4.  由于 $$D(X||Y) \ge 0$$，我们有：
 $$
 -h(X) - \int f_X(t) \log f_Y(t) dt \ge 0
 $$
 $$
 \implies h(X) \le - \int f_X(t) \log f_Y(t) dt
 $$
-    5.  现在我们需要计算积分项 $$- \int f_X(t) \log f_Y(t) dt$$。
+5.  现在我们需要计算积分项 $$- \int f_X(t) \log f_Y(t) dt$$。
         多维高斯分布 $$Y \sim N(\vec{0}, \Sigma)$$ 的 PDF 为：
 $$
 f_Y(t) = \frac{1}{(2\pi)^{d/2} |\Sigma|^{1/2}} \exp\left(-\frac{1}{2} t^T \Sigma^{-1} t\right)
 $$
-        其对数 $$\log f_Y(t)$$ (使用自然对数 $$\ln$$ 或以2为底的对数 $$\log_2$$，这里为与熵定义一致，假设是 $$\ln$$，若用 $$\log_2$$ 则熵单位为比特)：
+其对数 $$\log f_Y(t)$$ (使用自然对数 $$\ln$$ 或以2为底的对数 $$\log_2$$，这里为与熵定义一致，假设是 $$\ln$$，若用 $$\log_2$$ 则熵单位为比特)：
 $$
 \ln f_Y(t) = \ln\left(\frac{1}{(2\pi)^{d/2} |\Sigma|^{1/2}}\right) - \frac{1}{2} t^T \Sigma^{-1} t
 $$
 $$
 \ln f_Y(t) = -\frac{d}{2}\ln(2\pi) - \frac{1}{2}\ln|\Sigma| - \frac{1}{2} t^T \Sigma^{-1} t
 $$
-    6.  计算积分 $$\int f_X(t) \ln f_Y(t) dt$$:
+6.  计算积分 $$\int f_X(t) \ln f_Y(t) dt$$:
 $$
 \int f_X(t) \ln f_Y(t) dt = \int f_X(t) \left[-\frac{d}{2}\ln(2\pi) - \frac{1}{2}\ln|\Sigma| - \frac{1}{2} t^T \Sigma^{-1} t\right] dt
 $$
-        由于 $$\int f_X(t) dt = 1$$ (PDF的性质)，常数项可以提出：
+由于 $$\int f_X(t) dt = 1$$ (PDF的性质)，常数项可以提出：
 $$
 = -\left(\frac{d}{2}\ln(2\pi) + \frac{1}{2}\ln|\Sigma|\right) \int f_X(t) dt - \frac{1}{2} \int f_X(t) (t^T \Sigma^{-1} t) dt
 $$
 $$
 = -\left(\frac{d}{2}\ln(2\pi) + \frac{1}{2}\ln|\Sigma|\right) - \frac{1}{2} E_X[t^T \Sigma^{-1} t]
 $$
-    7.  计算 $$E_X[t^T \Sigma^{-1} t]$$:
-        $$t^T \Sigma^{-1} t$$ 是一个标量，等于其迹 $$tr(t^T \Sigma^{-1} t)$$。
-        利用迹的轮换不变性 $$tr(ABC) = tr(BCA) = tr(CAB)$$：
-        $$tr(t^T \Sigma^{-1} t) = tr(\Sigma^{-1} t t^T)$$
-        所以，$$E_X[t^T \Sigma^{-1} t] = E_X[tr(\Sigma^{-1} t t^T)]$$
-        由于期望和迹运算可以交换顺序 (线性性)：
-        $$E_X[t^T \Sigma^{-1} t] = tr(E_X[\Sigma^{-1} t t^T]) = tr(\Sigma^{-1} E_X[t t^T])$$
-        因为 $$E[X] = \vec{0}$$，所以 $$Cov(X) = E[XX^T] = \Sigma$$。在此处，由于积分变量是 $$t$$ 代表 $$X$$ 的实现，所以 $$E_X[t t^T] = \Sigma$$。
-        $$E_X[t^T \Sigma^{-1} t] = tr(\Sigma^{-1} \Sigma) = tr(I_d) = d$$
-        (其中 $$I_d$$ 是 $$d \times d$$ 的单位矩阵)。
-    8.  将 $$E_X[t^T \Sigma^{-1} t] = d$$ 代回第6步的积分结果：
+7.  计算 $$E_X[t^T \Sigma^{-1} t]$$:
+    $$t^T \Sigma^{-1} t$$ 是一个标量，等于其迹 $$tr(t^T \Sigma^{-1} t)$$。
+    利用迹的轮换不变性 $$tr(ABC) = tr(BCA) = tr(CAB)$$：
+    $$tr(t^T \Sigma^{-1} t) = tr(\Sigma^{-1} t t^T)$$
+    所以，$$E_X[t^T \Sigma^{-1} t] = E_X[tr(\Sigma^{-1} t t^T)]$$
+    由于期望和迹运算可以交换顺序 (线性性)：
+    $$E_X[t^T \Sigma^{-1} t] = tr(E_X[\Sigma^{-1} t t^T]) = tr(\Sigma^{-1} E_X[t t^T])$$
+    因为 $$E[X] = \vec{0}$$，所以 $$Cov(X) = E[XX^T] = \Sigma$$。在此处，由于积分变量是 $$t$$ 代表 $$X$$ 的实现，所以 $$E_X[t t^T] = \Sigma$$。
+    $$E_X[t^T \Sigma^{-1} t] = tr(\Sigma^{-1} \Sigma) = tr(I_d) = d$$
+    (其中 $$I_d$$ 是 $$d \times d$$ 的单位矩阵)。
+8.  将 $$E_X[t^T \Sigma^{-1} t] = d$$ 代回第6步的积分结果：
 $$
 \int f_X(t) \ln f_Y(t) dt = -\left(\frac{d}{2}\ln(2\pi) + \frac{1}{2}\ln|\Sigma|\right) - \frac{1}{2}d
 $$
-        所以，
+所以，
 $$
 - \int f_X(t) \ln f_Y(t) dt = \frac{d}{2}\ln(2\pi) + \frac{1}{2}\ln|\Sigma| + \frac{1}{2}d
 $$
 $$
 = \frac{1}{2} \ln((2\pi)^d |\Sigma|) + \frac{d}{2}\ln(e) = \frac{1}{2} \ln((2\pi e)^d |\Sigma|)
 $$
-        这正是多维高斯分布 $$Y \sim N(\vec{0}, \Sigma)$$ 的微分熵 $$h(Y)$$ 的表达式 (如果使用 $$\log_2$$，则为 $$\frac{1}{2} \log_2((2\pi e)^d |\Sigma|)$$ 比特)。
-    9.  **结论**:
-        我们已经证明了 $$- \int f_X(t) \ln f_Y(t) dt = h(Y)$$。
-        代回第4步的不等式 $$h(X) \le - \int f_X(t) \ln f_Y(t) dt$$，得到：
+这正是多维高斯分布 $$Y \sim N(\vec{0}, \Sigma)$$ 的微分熵 $$h(Y)$$ 的表达式 (如果使用 $$\log_2$$，则为 $$\frac{1}{2} \log_2((2\pi e)^d |\Sigma|)$$ 比特)。
+9.  **结论**:
+    我们已经证明了 $$- \int f_X(t) \ln f_Y(t) dt = h(Y)$$。
+    代回第4步的不等式 $$h(X) \le - \int f_X(t) \ln f_Y(t) dt$$，得到：
 $$
 h(X) \le h(Y)
 $$
-        等号成立当且仅当 $$D(X||Y) = 0$$，即 $$f_X(t) = f_Y(t)$$ 几乎处处成立。这意味着 $$X$$ 自身也服从 $$N(\vec{0}, \Sigma)$$ 分布。
+等号成立当且仅当 $$D(X||Y) = 0$$，即 $$f_X(t) = f_Y(t)$$ 几乎处处成立。这意味着 $$X$$ 自身也服从 $$N(\vec{0}, \Sigma)$$ 分布。
 
 ### 3.4 最大熵原理的其他应用示例 (离散情况)
 
@@ -253,8 +253,8 @@ $$
 $$
 p(x) = \frac{1}{Z(\vec{\lambda})} \exp\left(-\sum_{j=1}^k \lambda_j \phi_j(x)\right)
 $$
-    其中 $$\lambda_j$$ 是与约束 $$\alpha_j$$ 对应的***拉格朗日乘子 (Lagrange Multipliers)***，而 $$Z(\vec{\lambda}) = \sum_x \exp(-\sum_j \lambda_j \phi_j(x))$$ (或积分形式) 是归一化常数，也称为***配分函数 (Partition Function)***。
-    这种方法通常使用变分法结合拉格朗日乘子法来求解。
+其中 $$\lambda_j$$ 是与约束 $$\alpha_j$$ 对应的***拉格朗日乘子 (Lagrange Multipliers)***，而 $$Z(\vec{\lambda}) = \sum_x \exp(-\sum_j \lambda_j \phi_j(x))$$ (或积分形式) 是归一化常数，也称为***配分函数 (Partition Function)***。
+这种方法通常使用变分法结合拉格朗日乘子法来求解。
 
 *   **示例：离散随机变量，定义在非负整数上，给定均值**
     *   设 $$X$$ 是一个离散随机变量，其取值范围 (Support) 为 $$\{0, 1, 2, \dots\}$$。
