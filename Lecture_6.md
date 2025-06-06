@@ -20,11 +20,11 @@
 $$
 h(X) = -\int_{-\infty}^{\infty} f(x) \log f(x) dx
 $$
-        通常简写为 $$h(X) = -\int f(x) \log f(x) dx$$。
-    *   对数的底通常为2，单位是**比特 (bits)**。如果使用自然对数 $$e$$，单位是**奈特 (nats)**。
-    *   讲师强调，这一定义是离散熵定义 $$H(X) = -\sum P(x) \log P(x)$$ 的一个*纯形式上 (purely formal)*的推广。
+通常简写为 $$h(X) = -\int f(x) \log f(x) dx$$。
+*   对数的底通常为2，单位是**比特 (bits)**。如果使用自然对数 $$e$$，单位是**奈特 (nats)**。
+*   讲师强调，这一定义是离散熵定义 $$H(X) = -\sum P(x) \log P(x)$$ 的一个*纯形式上 (purely formal)*的推广。
 
-2.  **与离散熵的关系**
+1.  **与离散熵的关系**
     *   考虑将连续随机变量 $$X$$ 的值域分割成宽度为 $$\Delta$$ 的小区间 (bins)，从而将其离散化。令 $$X_{\Delta}$$ 为离散化后的随机变量。在第 $$i$$ 个区间 $$[x_i, x_i+\Delta)$$ 内，$$P(X \in [x_i, x_i+\Delta)) \approx f(x_i)\Delta$$。
     *   离散熵 $$H(X_{\Delta})$$ 的计算：
 $$
@@ -39,18 +39,18 @@ $$
 $$
 = -\sum_i (f(x_i) \log f(x_i))\Delta - \log \Delta \sum_i f(x_i)\Delta
 $$
-    *   当 $$\Delta \to 0$$ 时：
-        *   第一项：$$\sum_i (f(x_i) \log f(x_i))\Delta \to \int f(x) \log f(x) dx = -h(X)$$。
-        *   第二项：$$\sum_i f(x_i)\Delta \to \int f(x) dx = 1$$ (因为 $$f(x)$$ 是PDF)。
-    *   因此，当 $$\Delta \to 0$$ 时，离散熵 $$H(X_{\Delta})$$ 与微分熵 $$h(X)$$ 的关系近似为：
+*   当 $$\Delta \to 0$$ 时：
+    *   第一项：$$\sum_i (f(x_i) \log f(x_i))\Delta \to \int f(x) \log f(x) dx = -h(X)$$。
+    *   第二项：$$\sum_i f(x_i)\Delta \to \int f(x) dx = 1$$ (因为 $$f(x)$$ 是PDF)。
+*   因此，当 $$\Delta \to 0$$ 时，离散熵 $$H(X_{\Delta})$$ 与微分熵 $$h(X)$$ 的关系近似为：
 $$
 H(X_{\Delta}) \approx h(X) - \log \Delta = h(X) + \log \frac{1}{\Delta}
 $$
-    *   更精确地，微分熵可以被视为（讲师板书为 $$\hat{h}(X)$$，但通常用 $$h(X)$$ 表示）：
+*   更精确地，微分熵可以被视为（讲师板书为 $$\hat{h}(X)$$，但通常用 $$h(X)$$ 表示）：
 $$
 h(X) = \lim_{\Delta \to 0} \left[ H(X_{\Delta}) - \log \frac{1}{\Delta} \right]
 $$
-3.  **物理解释与特性**
+1.  **物理解释与特性**
     *   **无穷比特需求**：$$\log \frac{1}{\Delta}$$ 这一项随着 $$\Delta \to 0$$ 会趋向于无穷大 ($$\infty$$)。这直观地表明，要精确表示 (或无损编码) 一个连续随机变量，理论上需要无穷多个比特。
     *   **相对度量**：微分熵 $$h(X)$$ 代表了 $$H(X_{\Delta})$$ 中扣除掉这个与量化精度相关的无穷大偏移量 (infinite offset) 之后的部分。它更多地反映了概率分布 $$f(x)$$ 的形状对不确定性的贡献，而不是一个绝对的信息量度量。
     *   **非编码意义**：微分熵 $$h(X)$$ 本身**不直接表示**编码一个连续变量所需的平均比特数。
@@ -59,10 +59,10 @@ $$
 $$
 h(X) = -\int_0^a \frac{1}{a} \log_2(\frac{1}{a}) dx = -(\frac{1}{a} \log_2 \frac{1}{a}) \cdot a = \log_2 a
 $$
-            若 $$a < 1$$ (如 $$a=0.5$$)，则 $$h(X) = \log_2 0.5 = -1$$ bit。
-    *   **非香农熵特性**：微分熵不具备离散熵的许多特性，例如它不是信息量的绝对度量，也不直接作为编码长度的下界。
-    *   **关于无限精度计算的旁注**：
-        > 讲师提及，如果计算机能够处理无限精度的实数，那么理论计算中的一些基本问题（如 `P vs NP` 问题，若 P=NP 则可能被解决）可能会有截然不同的答案，但这在物理现实中是不可能的。
+若 $$a < 1$$ (如 $$a=0.5$$)，则 $$h(X) = \log_2 0.5 = -1$$ bit。
+*   **非香农熵特性**：微分熵不具备离散熵的许多特性，例如它不是信息量的绝对度量，也不直接作为编码长度的下界。
+*   **关于无限精度计算的旁注**：
+    > 讲师提及，如果计算机能够处理无限精度的实数，那么理论计算中的一些基本问题（如 `P vs NP` 问题，若 P=NP 则可能被解决）可能会有截然不同的答案，但这在物理现实中是不可能的。
 
 ### 二、联合与条件微分熵
 
@@ -77,34 +77,34 @@ $$
 $$
 h(X|Y) = -\iint f_{XY}(x,y) \log f_{X|Y}(x|y) dx dy
 $$
-        其中 $$f_{X|Y}(x|y) = \frac{f_{XY}(x,y)}{f_Y(y)}$$ 是在 $$Y=y$$ 条件下 $$X$$ 的条件概率密度函数。
-    *   也可以通过期望定义：
+其中 $$f_{X|Y}(x|y) = \frac{f_{XY}(x,y)}{f_Y(y)}$$ 是在 $$Y=y$$ 条件下 $$X$$ 的条件概率密度函数。
+*   也可以通过期望定义：
 $$
 h(X|Y) = E_Y[h(X|Y=y)] = \int f_Y(y) h(X|Y=y) dy
 $$
-        其中 $$h(X|Y=y) = -\int f_{X|Y}(x|y) \log f_{X|Y}(x|y) dx$$。
+其中 $$h(X|Y=y) = -\int f_{X|Y}(x|y) \log f_{X|Y}(x|y) dx$$。
 
 3.  **链式法则 (Chain Rule) 仍然成立**
     与离散熵类似，微分熵的链式法则也成立：
 $$
 h(X,Y) = h(X) + h(Y|X) = h(Y) + h(X|Y)
 $$
-    *证明 $$h(X,Y) = h(Y) + h(X|Y)$$：*
+*证明 $$h(X,Y) = h(Y) + h(X|Y)$$：*
 $$
 h(X,Y) = -\iint f_{XY}(x,y) \log f_{XY}(x,y) dx dy
 $$
-    使用 $$f_{XY}(x,y) = f_{X|Y}(x|y)f_Y(y)$$，则 $$\log f_{XY}(x,y) = \log f_{X|Y}(x|y) + \log f_Y(y)$$。
+使用 $$f_{XY}(x,y) = f_{X|Y}(x|y)f_Y(y)$$，则 $$\log f_{XY}(x,y) = \log f_{X|Y}(x|y) + \log f_Y(y)$$。
 $$
 h(X,Y) = -\iint f_{XY}(x,y) [\log f_{X|Y}(x|y) + \log f_Y(y)] dx dy
 $$
 $$
 = -\iint f_{XY}(x,y) \log f_{X|Y}(x|y) dx dy - \iint f_{XY}(x,y) \log f_Y(y) dx dy
 $$
-    第一项即为 $$h(X|Y)$$。
-    第二项 $$= -\int f_Y(y) \log f_Y(Y) \left( \int f_{X|Y}(x|y) dx \right) dy$$。
-    由于 $$\int f_{X|Y}(x|y) dx = 1$$ (对任意固定的 $$y$$, $$f_{X|Y}(x|y)$$ 是关于 $$x$$ 的PDF)，
-    所以第二项 $$= -\int f_Y(y) \log f_Y(y) dy = h(Y)$$。
-    因此，$$h(X,Y) = h(X|Y) + h(Y)$$。同理可证 $$h(X,Y) = h(X) + h(Y|X)$$。
+第一项即为 $$h(X|Y)$$。
+第二项 $$= -\int f_Y(y) \log f_Y(Y) \left( \int f_{X|Y}(x|y) dx \right) dy$$。
+由于 $$\int f_{X|Y}(x|y) dx = 1$$ (对任意固定的 $$y$$, $$f_{X|Y}(x|y)$$ 是关于 $$x$$ 的PDF)，
+所以第二项 $$= -\int f_Y(y) \log f_Y(y) dy = h(Y)$$。
+因此，$$h(X,Y) = h(X|Y) + h(Y)$$。同理可证 $$h(X,Y) = h(X) + h(Y|X)$$。
 
 ### 三、连续随机变量的互信息 (Mutual Information for Continuous r.v.)
 
@@ -128,16 +128,16 @@ $$
 $$
 I(X_{\Delta};Y_{\Delta}) = H(X_{\Delta}) - H(X_{\Delta}|Y_{\Delta})
 $$
-        我们已知 $$H(X_{\Delta}) \approx h(X) + \log \frac{1}{\Delta}$$。
-        对于条件熵，类似地可以推导出（讲师说明但未详细推导，其核心在于条件概率 $$P(x_i|y_j) \approx \frac{f(x_i,y_j)\Delta^2}{f(y_j)\Delta} / \Delta = f(x_i|y_j)\Delta / \Delta$$ (这里有点小问题，应为 $$p(x_i|y_j) = P(X \in \text{bin}_i | Y \in \text{bin}_j)$$，其熵 $$H(X_\Delta | Y_\Delta = y_{j,\Delta}) \approx h(X|Y=y_j) - \log \Delta $$ ）。一个更规范的推导表明 $$H(X_{\Delta}|Y_{\Delta}) \approx h(X|Y) + \log\frac{1}{\Delta}$$ 也成立。
-        因此：
+我们已知 $$H(X_{\Delta}) \approx h(X) + \log \frac{1}{\Delta}$$。
+对于条件熵，类似地可以推导出（讲师说明但未详细推导，其核心在于条件概率 $$P(x_i|y_j) \approx \frac{f(x_i,y_j)\Delta^2}{f(y_j)\Delta} / \Delta = f(x_i|y_j)\Delta / \Delta$$ (这里有点小问题，应为 $$p(x_i|y_j) = P(X \in \text{bin}_i | Y \in \text{bin}_j)$$，其熵 $$H(X_\Delta | Y_\Delta = y_{j,\Delta}) \approx h(X|Y=y_j) - \log \Delta $$ ）。一个更规范的推导表明 $$H(X_{\Delta}|Y_{\Delta}) \approx h(X|Y) + \log\frac{1}{\Delta}$$ 也成立。
+因此：
 $$
 I(X_{\Delta};Y_{\Delta}) \approx \left(h(X) + \log \frac{1}{\Delta}\right) - \left(h(X|Y) + \log \frac{1}{\Delta}\right)
 $$
 $$
 = h(X) - h(X|Y) = I(X;Y)
 $$
-    *   **结论**：互信息 $$I(X;Y)$$ 对于连续随机变量是一个具有*普适意义 (universal meaning / well-defined)* 的度量。它真正度量了 $$X$$ 和 $$Y$$ 之间共享的信息量，不像微分熵那样仅仅是形式上的推广，其值不依赖于量化精度 $$\Delta$$。
+*   **结论**：互信息 $$I(X;Y)$$ 对于连续随机变量是一个具有*普适意义 (universal meaning / well-defined)* 的度量。它真正度量了 $$X$$ 和 $$Y$$ 之间共享的信息量，不像微分熵那样仅仅是形式上的推广，其值不依赖于量化精度 $$\Delta$$。
 
 ### 四、连续随机变量的KL散度 (KL Divergence) 或相对熵 (Relative Entropy)
 
@@ -147,7 +147,7 @@ $$
 $$
 KL(f||g) = \int f(x) \log \frac{f(x)}{g(x)} dx
 $$
-        (如果对数底为2，单位是比特)
+(如果对数底为2，单位是比特)
 
 2.  **与离散化的关系**
     *   当对定义在同一支撑集上的连续随机变量（其PDF为 $$f(x), g(x)$$）进行离散化，得到概率质量函数 $$P_{X_{\Delta}}(x_i) = f(x_i)\Delta$$ 和 $$P_{Y_{\Delta}}(x_i) = g(x_i)\Delta$$。
@@ -158,10 +158,10 @@ $$
 $$
 = \sum_i f(x_i)\Delta \log \frac{f(x_i)\Delta}{g(x_i)\Delta} = \sum_i f(x_i)\Delta \log \frac{f(x_i)}{g(x_i)}
 $$
-    *   当 $$\Delta \to 0$$ 时，上式收敛到 $$\int f(x) \log \frac{f(x)}{g(x)} dx = KL(f||g)$$。
-    *   这里的 $$\Delta$$ 项在比值中直接消掉了，因此KL散度对于连续随机变量也是一个*定义良好 (well-defined)*且具有普适性的概念，其值不依赖于量化精度。
+*   当 $$\Delta \to 0$$ 时，上式收敛到 $$\int f(x) \log \frac{f(x)}{g(x)} dx = KL(f||g)$$。
+*   这里的 $$\Delta$$ 项在比值中直接消掉了，因此KL散度对于连续随机变量也是一个*定义良好 (well-defined)*且具有普适性的概念，其值不依赖于量化精度。
 
-3.  **与互信息的关系**
+1.  **与互信息的关系**
     *   回顾离散情况：$$I(X;Y) = KL(P_{XY} || P_X P_Y)$$。
     *   对于连续随机变量，同样成立：
 $$
@@ -170,7 +170,7 @@ $$
 $$
 = \iint f_{XY}(x,y) \log \frac{f_{XY}(x,y)}{f_X(x)f_Y(y)} dx dy
 $$
-    *   这表明互信息可以看作是联合分布 $$f_{XY}(x,y)$$ 与“假设 $$X,Y$$ 独立时的分布” $$f_X(x)f_Y(y)$$ 之间的KL散度。这个概念同样具有普适性。
+*   这表明互信息可以看作是联合分布 $$f_{XY}(x,y)$$ 与“假设 $$X,Y$$ 独立时的分布” $$f_X(x)f_Y(y)$$ 之间的KL散度。这个概念同样具有普适性。
 
 ### 五、习题：连续互信息定义的等价性证明
 
@@ -188,19 +188,19 @@ $$
 $$
 I_1(X;Y) = h(X) - h(X|Y)
 $$
-    根据链式法则 (B)，$$h(X|Y) = h(X,Y) - h(Y)$$。
-    代入 $$I_1(X;Y)$$：
-    $$I_1(X;Y) = h(X) - (h(X,Y) - h(Y)) = h(X) + h(Y) - h(X,Y) = I_3(X;Y)$$。
-    所以，定义1与定义3等价。
+根据链式法则 (B)，$$h(X|Y) = h(X,Y) - h(Y)$$。
+代入 $$I_1(X;Y)$$：
+$$I_1(X;Y) = h(X) - (h(X,Y) - h(Y)) = h(X) + h(Y) - h(X,Y) = I_3(X;Y)$$。
+所以，定义1与定义3等价。
 
 *   **证明 $$I_2(X;Y) = I_3(X;Y)$$:**
 $$
 I_2(X;Y) = h(Y) - h(Y|X)
 $$
-    根据链式法则 (A)，$$h(Y|X) = h(X,Y) - h(X)$$。
-    代入 $$I_2(X;Y)$$：
-    $$I_2(X;Y) = h(Y) - (h(X,Y) - h(X)) = h(X) + h(Y) - h(X,Y) = I_3(X;Y)$$。
-    所以，定义2与定义3等价。
+根据链式法则 (A)，$$h(Y|X) = h(X,Y) - h(X)$$。
+代入 $$I_2(X;Y)$$：
+$$I_2(X;Y) = h(Y) - (h(X,Y) - h(X)) = h(X) + h(Y) - h(X,Y) = I_3(X;Y)$$。
+所以，定义2与定义3等价。
 
 由于定义1和定义2均与定义3等价，所以定义1、定义2、定义3三者相互等价。
 (第四个定义 $$I(X;Y) = \iint f_{XY}(x,y) \log \frac{f_{XY}(x,y)}{f_X(x)f_Y(y)} dx dy$$ 可以通过展开 $$I_3(X;Y)$$ 的各项定义并利用 $$f_{XY}=f_X f_{Y|X}$$ 等关系代入化简得到，是更基本的出发点。)

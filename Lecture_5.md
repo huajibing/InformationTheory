@@ -100,7 +100,7 @@ $$
 令 $$S_+ = \{i | P_i \ge Q_i\}$$，$$S_- = \{i | P_i < Q_i\}$$。
 $$\tilde{P}_1 = \sum_{i \in S_+} P_i, \tilde{P}_2 = \sum_{i \in S_-} P_i$$ (构成一个二元分布 $$(\tilde{P}_1, \tilde{P}_2)$$ )
 $$\tilde{Q}_1 = \sum_{i \in S_+} Q_i, \tilde{Q}_2 = \sum_{i \in S_-} Q_i$$ (构成一个二元分布 $$(\tilde{Q}_1, \tilde{Q}_2)$$ )
->        *(助教笔记中指出，教师似乎意在引导学生思考这种 "lumping" 操作对KL散度的影响。)*
+> *(助教笔记中指出，教师似乎意在引导学生思考这种 "lumping" 操作对KL散度的影响。)*
 -   **教师提问**：在这样的reduction（数据处理或聚合）下，$$D_{KL}(P||Q)$$ 会如何变化？
 -   **结论**：会变小或不变。这与KL散度的**数据处理不等式 (Data Processing Inequality for KL Divergence)** 有关。如果我们将原始随机变量 $$X \sim P$$ (或 $$Q$$) 通过一个确定的函数（或随机映射，即一个信道）映射到新的随机变量 $$Y = g(X)$$，得到新的分布 $$P'$$ 和 $$Q'$$，那么 $$D_{KL}(P'||Q') \le D_{KL}(P||Q)$$。聚合操作是一种数据处理。
 -   这也与KL散度的**凸性 (Convexity of KL Divergence)** 有关。$$D_{KL}(P||Q)$$ 是关于 $$(P,Q)$$ 对的联合凸函数。
@@ -127,7 +127,7 @@ $$\tilde{Q}_1 = \sum_{i \in S_+} Q_i, \tilde{Q}_2 = \sum_{i \in S_-} Q_i$$ (构�
 $$
 H(X_1, \ldots, X_T) \le L_{block} < H(X_1, \ldots, X_T) + 1
 $$
-    即：
+即：
 $$
 T \cdot H(X) \le L_{block} < T \cdot H(X) + 1
 $$
@@ -156,12 +156,12 @@ $$
 $$
 \mathcal{H}(\mathcal{X}) = \lim_{T \to \infty} \frac{1}{T} H(X_1, X_2, \ldots, X_T)
 $$
-    物理意义：随机过程平均每个符号的熵。
+物理意义：随机过程平均每个符号的熵。
 -   **定义2 (基于条件熵的极限)**：
 $$
 \mathcal{H}'(\mathcal{X}) = \lim_{T \to \infty} H(X_T | X_1, X_2, \ldots, X_{T-1})
 $$
-    物理意义：当已知过去所有历史信息时，下一个符号的条件熵的极限。代表了在知道很长历史之后，新符号带来的“新信息”或“不确定性”。
+物理意义：当已知过去所有历史信息时，下一个符号的条件熵的极限。代表了在知道很长历史之后，新符号带来的“新信息”或“不确定性”。
 -   **两个定义的等价性**：
     如果随机过程 $$\mathcal{X}$$ 是**平稳的 (stationary)**，则上述两个极限存在且相等：
 $$
@@ -208,7 +208,7 @@ $$
 $$
 h(X) = \int_{-\infty}^{\infty} f(x) \log_2 \frac{1}{f(x)} dx = - \int_{-\infty}^{\infty} f(x) \log_2 f(x) dx
 $$
-    （积分上下限默认为随机变量的支撑集）
+（积分上下限默认为随机变量的支撑集）
 -   **重要说明**：$$h(X)$$ **不是**表示编码连续随机变量 $$X$$ 所需的平均比特数。它只是形式上与 $$H(X)$$ 相似。
 
 #### 3. 微分熵与离散熵的关系
@@ -241,19 +241,19 @@ $$
 $$
 h(Y) = -\int f_Y(y) \log_2 f_Y(y) dy = -\int f_X(y-c) \log_2 f_X(y-c) dy
 $$
-        令 $$x = y-c$$, $$dx = dy$$
+令 $$x = y-c$$, $$dx = dy$$
 $$
 h(Y) = -\int f_X(x) \log_2 f_X(x) dx = h(X)
 $$
-        所以，**微分熵具有平移不变性：$$h(X+c) = h(X)$$**。
+所以，**微分熵具有平移不变性：$$h(X+c) = h(X)$$**。
 
-    -   **缩放 (Scaling)**: 若 $$Y = aX$$ ($$a \ne 0$$)
-        PDF of Y: $$f_Y(y) = \frac{1}{|a|} f_X(\frac{y}{a})$$
+-   **缩放 (Scaling)**: 若 $$Y = aX$$ ($$a \ne 0$$)
+    PDF of Y: $$f_Y(y) = \frac{1}{|a|} f_X(\frac{y}{a})$$
 $$
 h(Y) = -\int f_Y(y) \log_2 f_Y(y) dy = -\int \frac{1}{|a|}f_X(\frac{y}{a}) \log_2 \left[\frac{1}{|a|}f_X(\frac{y}{a})\right] dy
 $$
-        令 $$x = y/a$$, $$y = ax$$, $$dy = |a| dx$$ (若 $$a>0, dy=adx$$; 若 $$a<0, dy=-adx=|a|dx$$ if we integrate from $$-\infty$$ to $$\infty$$)
-        Assume $$a>0$$ for simplicity in $$\log$$:
+令 $$x = y/a$$, $$y = ax$$, $$dy = |a| dx$$ (若 $$a>0, dy=adx$$; 若 $$a<0, dy=-adx=|a|dx$$ if we integrate from $$-\infty$$ to $$\infty$$)
+Assume $$a>0$$ for simplicity in $$\log$$:
 $$
 h(Y) = -\int \frac{1}{a}f_X(x) \left[\log_2(\frac{1}{a}) + \log_2 f_X(x)\right] (a dx)
 $$
@@ -263,10 +263,10 @@ $$
 $$
 h(Y) = h(X) - \log_2(\frac{1}{a}) \int f_X(x) dx
 $$
-        $$h(Y) = h(X) + \log_2 a \quad$$ (因为 $$\int f_X(x)dx = 1$$)
-        对于任意 $$a \ne 0$$，结果是 $$h(aX) = h(X) + \log_2 |a|$$。
-        所以，**微分熵在缩放变换下会改变：$$h(aX) = h(X) + \log_2 |a|$$**。
-        这与离散熵不同。$$\log_2 |a|$$ 项也呼应了 $$H(X_\Delta) \approx h(X) - \log_2 \Delta$$ 中的 $$\log_2 \Delta$$ 项 (可看作 $$a=1/\Delta$$ 的 scaling，其中 $$\Delta$$ 代表量化单位的“尺寸”)。
+$$h(Y) = h(X) + \log_2 a \quad$$ (因为 $$\int f_X(x)dx = 1$$)
+对于任意 $$a \ne 0$$，结果是 $$h(aX) = h(X) + \log_2 |a|$$。
+所以，**微分熵在缩放变换下会改变：$$h(aX) = h(X) + \log_2 |a|$$**。
+这与离散熵不同。$$\log_2 |a|$$ 项也呼应了 $$H(X_\Delta) \approx h(X) - \log_2 \Delta$$ 中的 $$\log_2 \Delta$$ 项 (可看作 $$a=1/\Delta$$ 的 scaling，其中 $$\Delta$$ 代表量化单位的“尺寸”)。
 
 #### 2. 微分熵可以为负 (Can Be Negative)
 -   与离散熵恒为非负 ($$H(X) \ge 0$$) 不同，微分熵 $$h(X)$$ **可以取负值**。
@@ -313,9 +313,9 @@ $$
 $$
 = \frac{1}{2}\log_2(2\pi\sigma^2) \int f(x)dx + (\log_2 e) \int f(x) \frac{(x-\mu)^2}{2\sigma^2} dx
 $$
-        $$\int f(x)dx = 1$$.
-        $$\int f(x) (x-\mu)^2 dx = E[(X-\mu)^2] = \sigma^2$$.
-        $$h(X) = \frac{1}{2}\log_2(2\pi\sigma^2) + (\log_2 e) \frac{\sigma^2}{2\sigma^2} = \frac{1}{2}\log_2(2\pi\sigma^2) + \frac{1}{2}\log_2 e = \frac{1}{2}\log_2(2\pi e \sigma^2)$$.
+$$\int f(x)dx = 1$$.
+$$\int f(x) (x-\mu)^2 dx = E[(X-\mu)^2] = \sigma^2$$.
+$$h(X) = \frac{1}{2}\log_2(2\pi\sigma^2) + (\log_2 e) \frac{\sigma^2}{2\sigma^2} = \frac{1}{2}\log_2(2\pi\sigma^2) + \frac{1}{2}\log_2 e = \frac{1}{2}\log_2(2\pi e \sigma^2)$$.
 
 -   **验证微分熵的缩放性质**：
     若 $$Y = aX$$ ($$a \ne 0$$)，验证 $$h(Y) = h(X) + \log_2 |a|$$。（已在第四部分推导）
