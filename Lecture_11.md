@@ -4,7 +4,7 @@
 
 ## 〇、引言
 
-在之前的课程中（如第8、9、10讲），我们已经探讨了信道编码的基本概念、汉明码等具体编码方案以及信道容量的定义与计算。本节课我们将深入学习***渐进均分割特性 (Asymptotic Equipartition Property, AEP)*** 及其***联合形式 (Joint AEP)***。这些是信息论中极为重要的基础理论，它们不仅深刻揭示了随机序列的本质特性，更是后续严格证明**香农第二定理（信道编码定理）**不可或缺的数学工具。本节课将首先简要回顾信道编码定理和信道容量的核心思想，然后详细推导和阐释 AEP 与 Joint AEP。
+在之前的课程中（如第8、9、10讲），我们已经探讨了信道编码的基本概念、汉明码等具体编码方案以及信道容量的定义与计算。本节课我们将深入学习***渐进均分割特性 (Asymptotic Equipartition Property, AEP)*** 及其***联合形式 (Joint AEP)***。这些是信息论中极为重要的基础理论，它们不仅深刻揭示了随机序列的本质特性，更是后续严格证明 **香农第二定理（信道编码定理）** 不可或缺的数学工具。本节课将首先简要回顾信道编码定理和信道容量的核心思想，然后详细推导和阐释 AEP 与 Joint AEP。
 
 ---
 
@@ -17,16 +17,16 @@
 *   输出 (Output): 随机变量 $$Y$$
 *   信道特性由条件概率分布 $$P(Y|X)$$ 完全描述，它表示在发送符号 $$X=x$$ 的条件下，接收到符号 $$Y=y$$ 的概率。
 > 板书示意:
-> ```latex
+> $$
 > X \xrightarrow{P(Y|X)} Y
-> ```
+> $$
 
 ### 2. 信道容量 (Channel Capacity) $$C$$ 的定义：
 *   *信道容量 (Channel Capacity)* $$C$$ 是在所有可能的输入概率分布 $$P(X)$$ 下，输入 $$X$$ 与输出 $$Y$$ 之间互信息 $$I(X;Y)$$ 的最大值。
 > 板书 (定义式):
-> ```latex
+> $$
 > C \stackrel{\text{def}}{=} \max_{P(X)} I(X;Y)
-> ```
+> $$
 *   **理解：** 信道容量 $$C$$ 代表了一个信道在理论上能够可靠传输信息的最大速率（单位通常为比特/信道使用）。互信息 $$I(X;Y)$$ 度量了接收端 $$Y$$ 包含的关于发送端 $$X$$ 的信息量。通过优化输入信号的概率分布 $$P(X)$$，可以使这个互信息达到其最大值，即信道容量。
 
 ### 3. 香农编码定理 (Channel Coding Theorem) - 操作层面 (Operational View)：
@@ -34,23 +34,23 @@
 *   **如果信息传输速率 (Rate) $$R \le C$$：** 理论上存在编码方案（对于足够长的码块长度），使得通过该信道传输信息时，译码错误率 (error probability $$P_e$$) 可以达到任意小，即 $$P_e \rightarrow 0$$。
 *   **如果信息传输速率 (Rate) $$R > C$$：** 不存在任何编码方案能够使得传输错误率任意小。错误率会有一个大于零的下限 $$\epsilon_0 > 0$$，即 $$P_e \ge \epsilon_0 > 0$$。
 > 板书 (定理核心内容):
-> ```latex
+> $$
 > \text{Channel Coding Thm (Operational)}
 > \text{If Rate } R \le C \quad \Rightarrow \quad \exists \text{ codes, } P_e \rightarrow 0 \text{ (as block length } N \to \infty)
 > \text{If Rate } R > C \quad \Rightarrow \quad \forall \text{ codes, } P_e \ge \epsilon_0 > 0
-> ```
+> $$
 
 ### 4. 示例：二元对称信道 (Binary Symmetric Channel, BSC)
 *   输入输出均为二元符号 $$\{0, 1\}$$。
 *   信道以概率 $$\epsilon$$ 翻转输入的比特（$$0 \rightarrow 1$$ 或 $$1 \rightarrow 0$$），以概率 $$1-\epsilon$$ 正确传输比特。
-> 板书示意图 (Mermaid JS 格式)：
-> ```mermaid
-> graph LR
->     X0[0] -- 1-ε --> Y0[0]
->     X0 -- ε --> Y1[1]
->     X1[1] -- ε --> Y0_alt[0] % Renamed to avoid conflict if rendered multiple times
->     X1 -- 1-ε --> Y1_alt[1] % Renamed
-> ```
+> 板书示意图：
+```mermaid
+graph LR
+    X0[0] -- 1-ε --> Y0[0]
+    X0 -- ε --> Y1[1]
+    X1[1] -- ε --> Y0_alt[0]
+    X1 -- 1-ε --> Y1_alt[1]
+```
 *   该信道的容量为： $$C = 1 - H_b(\epsilon)$$，其中 $$H_b(\epsilon) = -\epsilon \log_2 \epsilon - (1-\epsilon) \log_2 (1-\epsilon)$$ 是二元熵函数。
 *   例如，如果交叉错误概率 $$\epsilon = 1/4$$，则信道容量 $$C = 1 - H_b(1/4)$$。
 *   **引出问题：** 对于这样的信道，如何设计纠错码 (Error Correcting Codes, ECC) 才能在保证错误率趋近于0的前提下，使得信息传输速率 (Rate) 尽可能高 (理想情况下趋近于信道容量 $$C$$)？
@@ -70,14 +70,15 @@ $$
 $$
 *   **弱大数定律 (Weak LLN) 的一种表述形式：**
     对于任意给定的 $$\epsilon > 0$$，当 $$n \rightarrow \infty$$ 时：
-    > ```latex
+    > $$
     > P\left(\left|\frac{1}{n}\sum_{i=1}^{n} X_i - E[X]\right| \ge \epsilon\right) \rightarrow 0
-    > ```
+    > $$
 *   **更强的表述（老师板书形式）：**
     对于任意 $$\epsilon > 0$$ 和任意 $$\delta > 0$$，存在一个正整数 $$N_0$$ (依赖于 $$\epsilon, \delta$$)，使得对于所有 $$n \ge N_0$$：
-    > ```latex
+    > $$
     > P\left(\left|\frac{1}{n}\sum_{i=1}^{n} X_i - E[X]\right| < \epsilon\right) > 1 - \delta
-    > ```
+    > $$
+    
     这意味着样本均值落在期望值的一个小邻域内的概率可以任意接近1。
 
 *   **推广到随机变量的函数：**
@@ -85,19 +86,19 @@ $$
 $$
 \frac{1}{n} \sum_{i=1}^{n} g(X_i) \xrightarrow{p} E[g(X)] \quad (\text{as } n \to \infty)
 $$
-    即，对于任意 $$\epsilon > 0$$：
-    > ```latex
-    > P\left(\left|\frac{1}{n}\sum_{i=1}^{n} g(X_i) - E[g(X)]\right| \ge \epsilon\right) \rightarrow 0 \quad (\text{as } n \to \infty)
-    > ```
-    老师称这为“换了个马甲”的大数定律。
+即，对于任意 $$\epsilon > 0$$：
+> $$
+> P\left(\left|\frac{1}{n}\sum_{i=1}^{n} g(X_i) - E[g(X)]\right| \ge \epsilon\right) \rightarrow 0 \quad (\text{as } n \to \infty)
+> $$
+老师称这为“换了个马甲”的大数定律。
 
 ### 2. AEP 的推导
 *   考虑一个离散随机变量 $$X \sim p(x)$$，其概率质量函数 (pmf) 为 $$p(x)$$。
 *   选择一个特定的函数 $$g(x) = -\log p(x)$$。这个量 $$g(X) = -\log p(X)$$ 被称为随机变量 $$X$$ 取值为 $$x$$ 时的*自信息 (Self-information)*。
 *   计算 $$E[g(X)]$$：
-    > ```latex
+    > $$
     > E[g(X)] = E[-\log p(X)] = \sum_{x \in \mathcal{X}} p(x) (-\log p(x)) = H(X)
-    > ```
+    > $$
     这正是随机变量 $$X$$ 的*香农熵 (Shannon Entropy)* $$H(X)$$。（假设对数底为2，单位为比特）。
 *   现在，我们有一系列 i.i.d. 的随机变量 $$X_1, X_2, \dots, X_n$$，均服从分布 $$p(x)$$。应用大数定律于 $$g(X_i) = -\log p(X_i)$$：
 $$
@@ -111,13 +112,13 @@ $$
 $$
 *   **渐进均分割特性 (AEP) 的表述：**
     对于任意 $$\epsilon > 0$$，当 $$n \rightarrow \infty$$ 时：
-    > ```latex
+    > $$
     > P\left(\left|-\frac{1}{n}\log P(X_1, X_2, \dots, X_n) - H(X)\right| \ge \epsilon\right) \rightarrow 0
-    > ```
+    > $$
     或者等价地：
-    > ```latex
+    > $$
     > P\left(\left|-\frac{1}{n}\log P(X_1, X_2, \dots, X_n) - H(X)\right| < \epsilon\right) \rightarrow 1
-    > ```
+    > $$
 *   **核心思想：** 对于一个足够长的 i.i.d. 序列 $$(X_1, \dots, X_n)$$，其经验熵 (empirical entropy) $$-\frac{1}{n}\log P(X_1, \dots, X_n)$$ 以极高的概率接近于该随机过程的真实熵 $$H(X)$$。换句话说，序列 $$(X_1, \dots, X_n)$$ 的概率 $$P(X_1, \dots, X_n)$$ 极有可能约等于 $$2^{-nH(X)}$$。
 
 ### 3. 典型集 $$A_{\epsilon}^{(n)}$$ (Typical Set)
@@ -126,19 +127,19 @@ $$
 $$
 H(X) - \epsilon < -\frac{1}{n} \log P(x_1, \dots, x_n) < H(X) + \epsilon
 $$
-    进一步变形得到（以2为底的对数）：
+进一步变形得到（以2为底的对数）：
 $$
 -n(H(X) + \epsilon) < \log_2 P(x_1, \dots, x_n) < -n(H(X) - \epsilon)
 $$
-    取指数，即：
+取指数，即：
 $$
 2^{-n(H(X) + \epsilon)} < P(x_1, \dots, x_n) < 2^{-n(H(X) - \epsilon)}
 $$
 *   ***典型集 (Typical Set)*** $$A_{\epsilon}^{(n)}$$ **的定义：**
     对于任意 $$\epsilon > 0$$，典型集 $$A_{\epsilon}^{(n)}$$ (有时简记为 $$A$$) 定义为所有满足上述条件的 $$n$$-长序列 $$(x_1, \dots, x_n)$$ 的集合：
-    > ```latex
+    > $$
     > A_{\epsilon}^{(n)} = \left\{ (x_1, \dots, x_n) \in \mathcal{X}^n : 2^{-n(H(X) + \epsilon)} \le P(x_1, \dots, x_n) \le 2^{-n(H(X) - \epsilon)} \right\}
-    > ```
+    > $$
     或者更直观地（基于 AEP 的核心思想）：
 $$
 A_{\epsilon}^{(n)} = \left\{ (x_1, \dots, x_n) \in \mathcal{X}^n : P(x_1, \dots, x_n) \approx 2^{-nH(X)} \right\}
@@ -148,25 +149,25 @@ $$
 $$
 Pr((X_1, \dots, X_n) \in A_{\epsilon}^{(n)}) > 1 - \delta \quad (\text{for any } \delta > 0, \text{ if } n \text{ is large enough})
 $$
-        因此，非典型集 $$A_{\epsilon}^{(n)c} = \mathcal{X}^n \setminus A_{\epsilon}^{(n)}$$ 的总概率接近于0：
+因此，非典型集 $$A_{\epsilon}^{(n)c} = \mathcal{X}^n \setminus A_{\epsilon}^{(n)}$$ 的总概率接近于0：
 $$
 Pr((X_1, \dots, X_n) \in A_{\epsilon}^{(n)c}) < \delta
 $$
-    2.  **近似等概率性：** 对于属于典型集 $$A_{\epsilon}^{(n)}$$ 的任意序列 $$(x_1, \dots, x_n)$$，其概率 $$P(x_1, \dots, x_n)$$ 近似等于 $$2^{-nH(X)}$$。更准确地说，其概率值在一个由 $$2^{-n(H(X) \pm \epsilon)}$$ 界定的很窄的区间内。
-    3.  **典型集的大小 (Size of the Typical Set) $$\|A_{\epsilon}^{(n)}\|$$：**
-        *   因为典型集 $$A_{\epsilon}^{(n)}$$ 的总概率 $$Pr(A_{\epsilon}^{(n)}) \approx 1$$，并且其中每个序列的概率 $$P(x^n) \approx 2^{-nH(X)}$$。
-        *   如果我们将典型集中的所有序列都近似看作是等概率的（概率为 $$2^{-nH(X)}$$），那么典型集的大小（序列个数）乘以单个序列的概率应该近似等于1。
-        *   所以， $$\|A_{\epsilon}^{(n)}\| \times 2^{-nH(X)} \approx 1 $$
-        *   因此，典型集 $$A_{\epsilon}^{(n)}$$ 中大约有 $$2^{nH(X)}$$ 个序列。
-        *   更精确的界限是：
+1.  **近似等概率性：** 对于属于典型集 $$A_{\epsilon}^{(n)}$$ 的任意序列 $$(x_1, \dots, x_n)$$，其概率 $$P(x_1, \dots, x_n)$$ 近似等于 $$2^{-nH(X)}$$。更准确地说，其概率值在一个由 $$2^{-n(H(X) \pm \epsilon)}$$ 界定的很窄的区间内。
+2.  **典型集的大小 (Size of the Typical Set) $$\|A_{\epsilon}^{(n)}\|$$：**
+    *   因为典型集 $$A_{\epsilon}^{(n)}$$ 的总概率 $$Pr(A_{\epsilon}^{(n)}) \approx 1$$，并且其中每个序列的概率 $$P(x^n) \approx 2^{-nH(X)}$$。
+    *   如果我们将典型集中的所有序列都近似看作是等概率的（概率为 $$2^{-nH(X)}$$），那么典型集的大小（序列个数）乘以单个序列的概率应该近似等于1。
+    *   所以， $$\|A_{\epsilon}^{(n)}\| \times 2^{-nH(X)} \approx 1 $$
+    *   因此，典型集 $$A_{\epsilon}^{(n)}$$ 中大约有 $$2^{nH(X)}$$ 个序列。
+    *   更精确的界限是：
 $$
 (1-\delta) 2^{n(H(X)-\epsilon')} \le |A_{\epsilon}^{(n)}| \le 2^{n(H(X)+\epsilon')}
 $$
             对于大的 $$n$$，通常简写为 $$\|A_{\epsilon}^{(n)}\| \approx 2^{nH(X)}$$。
 
 ### 4. AEP 核心思想总结 ("Asymptotic Equipartition")
-    1.  **概率集中性：** 对于长的 i.i.d. 序列，几乎所有的概率质量都集中在典型集 $$A_{\epsilon}^{(n)}$$ 中。非典型集 $$A_{\epsilon}^{(n)c}$$ 虽然可能包含数量上远超 $$A_{\epsilon}^{(n)}$$ 的序列 (如果 $$\|\mathcal{X}\|^n$$ 远大于 $$2^{nH(X)}$$)，但其总概率却趋近于0。我们主要关注典型集。
-    2.  **概率均分性：** 在典型集 $$A_{\epsilon}^{(n)}$$ 内部，所有序列的概率几乎是均等的，都约等于 $$2^{-nH(X)}$$。这就是“均分割” (Equipartition) 的含义。
+1.  **概率集中性：** 对于长的 i.i.d. 序列，几乎所有的概率质量都集中在典型集 $$A_{\epsilon}^{(n)}$$ 中。非典型集 $$A_{\epsilon}^{(n)c}$$ 虽然可能包含数量上远超 $$A_{\epsilon}^{(n)}$$ 的序列 (如果 $$\|\mathcal{X}\|^n$$ 远大于 $$2^{nH(X)}$$)，但其总概率却趋近于0。我们主要关注典型集。
+2.  **概率均分性：** 在典型集 $$A_{\epsilon}^{(n)}$$ 内部，所有序列的概率几乎是均等的，都约等于 $$2^{-nH(X)}$$。这就是“均分割” (Equipartition) 的含义。
 *   **伯努利例子：** 考虑一个伯努利随机变量 $$X \sim \text{Bernoulli}(p)$$, 例如 $$P(X=1)=p=0.4, P(X=0)=1-p=0.6$$。其熵为 $$H(X) = H_b(0.4)$$。
     如果抛掷这个非均匀硬币 $$n=10000$$ 次，得到序列 $$(X_1, \dots, X_{10000})$$。
     *   所有可能的序列总共有 $$2^{10000}$$ 个。
@@ -192,17 +193,17 @@ $$(X_1, Y_1), (X_2, Y_2), \dots, (X_n, Y_n)$$，每一对都服从联合分布 $
 ### 3. 联合典型集 (Jointly Typical Set) $$A_{\epsilon}^{(n)}(X,Y)$$ 的定义：
 一个序列对 $$(x^n, y^n) = ((x_1, \dots, x_n), (y_1, \dots, y_n))$$ 被称为是***联合 $$\epsilon$$-典型 (jointly $$\epsilon$$-typical)*** 的，如果它同时满足以下三个条件：
 1.  $$x^n$$ 序列关于其边缘分布 $$P(X)$$ 是 $$\epsilon$$"`-典型的：
-    > ```latex
+    > $$
     > \left| -\frac{1}{n}\log P(x^n) - H(X) \right| < \epsilon \quad \left(\text{i.e., } P(x^n) \approx 2^{-nH(X)}\right)
-    > ```
+    > $$
 2.  $$y^n$$ 序列关于其边缘分布 $$P(Y)$$ 是 $$\epsilon$$"`-典型的：
-    > ```latex
+    > $$
     > \left| -\frac{1}{n}\log P(y^n) - H(Y) \right| < \epsilon \quad \left(\text{i.e., } P(y^n) \approx 2^{-nH(Y)}\right)
-    > ```
+    > $$
 3.  `$$(x^n, y^n)$$ 序列对关于其联合分布 $$P(X,Y)$$ 是 $$\epsilon$$"`-典型的：
-    > ```latex
+    > $$
     > \left| -\frac{1}{n}\log P(x^n, y^n) - H(X,Y) \right| < \epsilon \quad \left(\text{i.e., } P(x^n, y^n) \approx 2^{-nH(X,Y)}\right)
-    > ```
+    > $$
 所有满足这些条件的序列对 `$$(x^n, y^n)$$ 的集合构成了联合典型集 $$A_{\epsilon}^{(n)}(X,Y)$$。
 (注：有时定义中只包含第三个条件，前两个可以由第三个结合大数定律导出，但包含三个条件更清晰。)
 
@@ -216,7 +217,7 @@ $$
 $$
 |A_{\epsilon}^{(n)}(X,Y)| \approx 2^{nH(X,Y)}
 $$
-    更精确地， $$(1-\delta) 2^{n(H(X,Y)-\epsilon')} \le |A_{\epsilon}^{(n)}(X,Y)| \le 2^{n(H(X,Y)+\epsilon')}$$。
+更精确地， $$(1-\delta) 2^{n(H(X,Y)-\epsilon')} \le |A_{\epsilon}^{(n)}(X,Y)| \le 2^{n(H(X,Y)+\epsilon')}$$。
 
 ### 5. 直观理解与重要推论 (老师图示解释)
 *   我们可以将所有可能的 $$X^n$$ 序列想象成一个大集合，其中包含约 $$2^{nH(X)}$$ 个 $$X$$-典型序列。类似地，所有可能的 $$Y^n$$ 序列集合中包含约 $$2^{nH(Y)}$$ 个 $$Y$$-典型序列。
@@ -231,8 +232,8 @@ $$
 $$
 \frac{|A_{\epsilon}^{(n)}(X,Y)|}{|A_{\epsilon}^{(n)}(X)|} \approx \frac{2^{nH(X,Y)}}{2^{nH(X)}} = 2^{n(H(X,Y) - H(X))} = 2^{nH(Y|X)}
 $$
-        个 $$Y^n$$ 序列使得 $$(x^n, y^n)$$ 是联合典型的。这里 $$H(Y|X) = H(X,Y) - H(X)$$ 是条件熵。
-    *   这个结论非常重要，它暗示了在信道译码时，对于一个已知的（或假设的）发送序列 $$x^n$$，可能与之联合典型的接收序列 $$y^n$$ 的数量级。
+个 $$Y^n$$ 序列使得 $$(x^n, y^n)$$ 是联合典型的。这里 $$H(Y|X) = H(X,Y) - H(X)$$ 是条件熵。
+*   这个结论非常重要，它暗示了在信道译码时，对于一个已知的（或假设的）发送序列 $$x^n$$，可能与之联合典型的接收序列 $$y^n$$ 的数量级。
 
 *   对称地，对于一个 $$Y$$-典型的 $$y^n \in A_{\epsilon}^{(n)}(Y)$$，大约有 $$2^{nH(X|Y)}$$ 个 $$X^n$$ 序列与之构成联合典型对。
 
