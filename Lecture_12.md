@@ -35,14 +35,14 @@ AEP及其联合形式是证明香农定理的基石，它们描述了长随机�
 $$
 P\left(\left| -\frac{1}{n}\log_2 P(X_1, \dots, X_n) - H(X) \right| < \epsilon\right) \to 1
 $$
-    这意味着，对于一个足够长的序列 $$x^n = (x_1, \dots, x_n)$$，其概率 $$P(x^n)$$ 以极高的可能性近似等于 $$2^{-nH(X)}$$。
+这意味着，对于一个足够长的序列 $$x^n = (x_1, \dots, x_n)$$，其概率 $$P(x^n)$$ 以极高的可能性近似等于 $$2^{-nH(X)}$$。
 
-*   ***典型集 (Typical Set) $$A_{\epsilon}^{(n)}(X)$$:**
+*   **典型集 (Typical Set) $$A_{\epsilon}^{(n)}(X)$$:**
     对于给定的 $$\epsilon > 0$$，长度为 $$n$$ 的典型集定义为：
 $$
 A_{\epsilon}^{(n)}(X) = \left\{ x^n \in \mathcal{X}^n : 2^{-n(H(X)+\epsilon)} \le P(x^n) \le 2^{-n(H(X)-\epsilon)} \right\}
 $$
-    或者等价地：
+或者等价地：
 $$
 A_{\epsilon}^{(n)}(X) = \left\{ x^n \in \mathcal{X}^n : \left| -\frac{1}{n}\log_2 P(x^n) - H(X) \right| \le \epsilon \right\}
 $$
@@ -51,12 +51,12 @@ $$
 $$
 P(X^n \in A_{\epsilon}^{(n)}(X)) > 1-\delta \quad (\text{for any } \delta > 0, \text{ as } n \to \infty)
 $$
-    2.  **近似等概率性:** 典型集中的每个序列 $$x^n \in A_{\epsilon}^{(n)}(X)$$ 的概率都近似为 $$2^{-nH(X)}$$。
-    3.  **典型集的大小:** 典型集中序列的数量近似为 $$2^{nH(X)}$$。
+2.  **近似等概率性:** 典型集中的每个序列 $$x^n \in A_{\epsilon}^{(n)}(X)$$ 的概率都近似为 $$2^{-nH(X)}$$。
+3.  **典型集的大小:** 典型集中序列的数量近似为 $$2^{nH(X)}$$。
 $$
 |A_{\epsilon}^{(n)}(X)| \approx 2^{nH(X)}
 $$
-        更精确地，$$(1-\delta)2^{n(H(X)-\epsilon)} \le |A_{\epsilon}^{(n)}(X)| \le 2^{n(H(X)+\epsilon)}$$。
+更精确地，$$(1-\delta)2^{n(H(X)-\epsilon)} \le |A_{\epsilon}^{(n)}(X)| \le 2^{n(H(X)+\epsilon)}$$。
 
 ### 2. 联合渐进均分割特性 (Joint AEP)
 *   **设定:** $$(X_1, Y_1), (X_2, Y_2), \dots, (X_n, Y_n)$$ 为 i.i.d. 的随机变量对序列，每对服从联合分布 $$P(x,y)$$。其联合熵为 $$H(X,Y)$$，边缘熵为 $$H(X), H(Y)$$。
@@ -71,8 +71,8 @@ $$
 $$
 P((X^n, Y^n) \in A_{\epsilon}^{(n)}(X,Y)) \to 1 \quad (\text{as } n \to \infty)
 $$
-    2.  **近似等概率性:** 对于任意 $$(x^n, y^n) \in A_{\epsilon}^{(n)}(X,Y)$$，其联合概率 $$P(x^n, y^n) \approx 2^{-nH(X,Y)}$$。
-    3.  **联合典型集的大小:** 联合典型集中序列对的数量近似为 $$2^{nH(X,Y)}$$。
+2.  **近似等概率性:** 对于任意 $$(x^n, y^n) \in A_{\epsilon}^{(n)}(X,Y)$$，其联合概率 $$P(x^n, y^n) \approx 2^{-nH(X,Y)}$$。
+3.  **联合典型集的大小:** 联合典型集中序列对的数量近似为 $$2^{nH(X,Y)}$$。
 $$
 |A_{\epsilon}^{(n)}(X,Y)| \approx 2^{nH(X,Y)}
 $$
@@ -81,19 +81,19 @@ $$
 $$
 P((X^n, Y^n) \in A_{\epsilon}^{(n)}(X,Y) \mid X^n \sim P_X^n, Y^n \sim P_Y^n \text{ independently}) \approx 2^{-nI(X;Y)}
 $$
-    其中 $$I(X;Y) = H(X) + H(Y) - H(X,Y)$$ 是对应于联合分布 $$P_{XY}$$ 的互信息。
-    > **板书推导示意:**
-    > 考虑 $$X^n \sim P_X^n$$ (每个 $$X_i$$ i.i.d. 服从 $$P_X$$) 和 $$Y^n \sim P_Y^n$$ (每个 $$Y_i$$ i.i.d. 服从 $$P_Y$$)，且 $$X^n$$ 和 $$Y^n$$ 相互独立。
-    > 一个特定的 $$(x^n, y^n)$$ 对成为联合典型的（相对于某个真实联合分布 $$P_{XY}$$）大致意味着 $$P(x^n) \approx 2^{-nH(X)}$$, $$P(y^n) \approx 2^{-nH(Y)}$$, $$P(x^n, y^n) \approx 2^{-nH(X,Y)}$$。
-    > 由于 $$x^n$$ 和 $$y^n$$ 是独立生成的，它们的联合概率是 $$P(x^n)P(y^n) \approx 2^{-nH(X)} 2^{-nH(Y)} = 2^{-n(H(X)+H(Y))}$$。
-    > 联合典型集 $$A_{\epsilon}^{(n)}(X,Y)$$ 中大约有 $$2^{nH(X,Y)}$$ 个元素。
-    > 因此，一个随机选取的、独立生成的 $$(X^n, Y^n)$$ 对恰好是 $$A_{\epsilon}^{(n)}(X,Y)$$ 中某个特定元素的概率是 $$2^{-n(H(X)+H(Y))}$$。
-    > 则 $$(X^n, Y^n)$$ 落在整个 $$A_{\epsilon}^{(n)}(X,Y)$$ 集合中的概率大约是：
-    > $$ P((X^n, Y^n) \in A_{\epsilon}^{(n)}(X,Y)) \approx |A_{\epsilon}^{(n)}(X,Y)| \times P(X^n \text{典型}) P(Y^n \text{典型} \mid X^n \text{典型}, X^n, Y^n \text{独立})$$
-    > 更准确地考虑，一个独立生成的 $$(x^n, y^n)$$ 对是联合典型（相对于 $$P_{XY}$$）的概率 $$P_{indep}((x^n, y^n) \in A_{\epsilon}^{(n)}(X,Y))$$ 为:
-    > $$ \sum_{(x^n,y^n) \in A_{\epsilon}^{(n)}(X,Y)} P(x^n)P(y^n) \approx \sum_{(x^n,y^n) \in A_{\epsilon}^{(n)}(X,Y)} 2^{-nH(X)} 2^{-nH(Y)} $$
-    > $$ \approx |A_{\epsilon}^{(n)}(X,Y)| \cdot 2^{-n(H(X)+H(Y))} \approx 2^{nH(X,Y)} \cdot 2^{-n(H(X)+H(Y))} = 2^{-n(H(X)+H(Y)-H(X,Y))} = 2^{-nI(X;Y)} $$
-    > 这个推论在分析差错概率时至关重要。
+其中 $$I(X;Y) = H(X) + H(Y) - H(X,Y)$$ 是对应于联合分布 $$P_{XY}$$ 的互信息。
+> **板书推导示意:**
+> 考虑 $$X^n \sim P_X^n$$ (每个 $$X_i$$ i.i.d. 服从 $$P_X$$) 和 $$Y^n \sim P_Y^n$$ (每个 $$Y_i$$ i.i.d. 服从 $$P_Y$$)，且 $$X^n$$ 和 $$Y^n$$ 相互独立。
+> 一个特定的 $$(x^n, y^n)$$ 对成为联合典型的（相对于某个真实联合分布 $$P_{XY}$$）大致意味着 $$P(x^n) \approx 2^{-nH(X)}$$, $$P(y^n) \approx 2^{-nH(Y)}$$, $$P(x^n, y^n) \approx 2^{-nH(X,Y)}$$。
+> 由于 $$x^n$$ 和 $$y^n$$ 是独立生成的，它们的联合概率是 $$P(x^n)P(y^n) \approx 2^{-nH(X)} 2^{-nH(Y)} = 2^{-n(H(X)+H(Y))}$$。
+> 联合典型集 $$A_{\epsilon}^{(n)}(X,Y)$$ 中大约有 $$2^{nH(X,Y)}$$ 个元素。
+> 因此，一个随机选取的、独立生成的 $$(X^n, Y^n)$$ 对恰好是 $$A_{\epsilon}^{(n)}(X,Y)$$ 中某个特定元素的概率是 $$2^{-n(H(X)+H(Y))}$$。
+> 则 $$(X^n, Y^n)$$ 落在整个 $$A_{\epsilon}^{(n)}(X,Y)$$ 集合中的概率大约是：
+> $$ P((X^n, Y^n) \in A_{\epsilon}^{(n)}(X,Y)) \approx |A_{\epsilon}^{(n)}(X,Y)| \times P(X^n \text{典型}) P(Y^n \text{典型} \mid X^n \text{典型}, X^n, Y^n \text{独立})$$
+> 更准确地考虑，一个独立生成的 $$(x^n, y^n)$$ 对是联合典型（相对于 $$P_{XY}$$）的概率 $$P_{indep}((x^n, y^n) \in A_{\epsilon}^{(n)}(X,Y))$$ 为:
+> $$ \sum_{(x^n,y^n) \in A_{\epsilon}^{(n)}(X,Y)} P(x^n)P(y^n) \approx \sum_{(x^n,y^n) \in A_{\epsilon}^{(n)}(X,Y)} 2^{-nH(X)} 2^{-nH(Y)} $$
+> $$ \approx |A_{\epsilon}^{(n)}(X,Y)| \cdot 2^{-n(H(X)+H(Y))} \approx 2^{nH(X,Y)} \cdot 2^{-n(H(X)+H(Y))} = 2^{-n(H(X)+H(Y)-H(X,Y))} = 2^{-nI(X;Y)} $$
+> 这个推论在分析差错概率时至关重要。
 
 ---
 
@@ -168,14 +168,14 @@ $$
 $$
 \approx (2^{nR}-1) \cdot 2^{-nI(X;Y)}
 $$
-        对于大的 $$n$$ 和 $$R>0$$, $$2^{nR}-1 \approx 2^{nR}$$。
+对于大的 $$n$$ 和 $$R>0$$, $$2^{nR}-1 \approx 2^{nR}$$。
 $$
 P(E_2) \lesssim 2^{nR} \cdot 2^{-nI(X;Y)} = 2^{-n(I(X;Y)-R)}
 $$
-    *   **关键条件:** 我们选择的输入分布 $$P(X)$$ 使得 $$I(X;Y) = C$$ (信道容量)。并且我们假设传输速率 $$R < C$$。
-        因此，指数项 $$I(X;Y)-R = C-R > 0$$。
-    *   **结论:** 当 $$R < C$$ 时，$$C-R > 0$$，所以 $$P(E_2)$$ 随着 $$n \to \infty$$ 而指数级趋向于 $$0$$。
-        > (板书): $$P(b \text{ occurs}) \le (2^{nR}-1) \cdot 2^{-nI(X;Y)} \approx 2^{nR} \cdot 2^{-nI(X;Y)} = 2^{-n(I(X;Y)-R)}$$，然后是 $$\approx 2^{-n(C-R)}$$，并指出 If $$R < C$$, then $$C-R > 0 $$, so $$P(b \text{ occurs}) \to 0 $$ as $$ n \to \infty $$
+*   **关键条件:** 我们选择的输入分布 $$P(X)$$ 使得 $$I(X;Y) = C$$ (信道容量)。并且我们假设传输速率 $$R < C$$。
+    因此，指数项 $$I(X;Y)-R = C-R > 0$$。
+*   **结论:** 当 $$R < C$$ 时，$$C-R > 0$$，所以 $$P(E_2)$$ 随着 $$n \to \infty$$ 而指数级趋向于 $$0$$。
+    > (板书): $$P(b \text{ occurs}) \le (2^{nR}-1) \cdot 2^{-nI(X;Y)} \approx 2^{nR} \cdot 2^{-nI(X;Y)} = 2^{-n(I(X;Y)-R)}$$，然后是 $$\approx 2^{-n(C-R)}$$，并指出 If $$R < C$$, then $$C-R > 0 $$, so $$P(b \text{ occurs}) \to 0 $$ as $$ n \to \infty $$
 
 ### 5. 定理结论 (Conclusion of Achievability)
 *   总的平均错误概率 $$P_e \le P(E_1) + P(E_2)$$。
@@ -217,8 +217,5 @@ $$
 ### 3. AEP与典型集在编码中的作用:
 *   **数据压缩 (信源编码):** AEP告诉我们，信源产生的长序列大概率属于一个只包含约 $$2^{nH(X)}$$ 个序列的典型集。因此，我们只需要为这些典型序列分配码字，非典型序列可以直接映射为一个特殊标记或者忽略（因为它们概率极小）。这就是无损压缩的理论基础。
 *   **信道编码 (本讲内容):** Joint AEP是核心。译码器利用联合典型性来判断哪个发送的码字最“匹配”接收到的序列。只有当发送的码字和接收序列“看起来”像是通过真实信道联合产生的时候，才认为是匹配的。
-
-### 4. 板书内容整合说明:
-本笔记已将各部分视频中教授在黑板上书写的关键公式和逻辑步骤（如AEP定义、Joint AEP的概率推论、译码规则的(a)(b)(c)项、差错概率(b)的推导过程等）融入到相应的文本描述或作为独立的LaTeX公式块展示，以确保内容的完整性和准确性。
 
 ---

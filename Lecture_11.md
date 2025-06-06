@@ -163,7 +163,7 @@ $$
 $$
 (1-\delta) 2^{n(H(X)-\epsilon')} \le |A_{\epsilon}^{(n)}| \le 2^{n(H(X)+\epsilon')}
 $$
-            对于大的 $$n$$，通常简写为 $$\|A_{\epsilon}^{(n)}\| \approx 2^{nH(X)}$$。
+对于大的 $$n$$，通常简写为 $$\|A_{\epsilon}^{(n)}\| \approx 2^{nH(X)}$$。
 
 ### 4. AEP 核心思想总结 ("Asymptotic Equipartition")
 1.  **概率集中性：** 对于长的 i.i.d. 序列，几乎所有的概率质量都集中在典型集 $$A_{\epsilon}^{(n)}$$ 中。非典型集 $$A_{\epsilon}^{(n)c}$$ 虽然可能包含数量上远超 $$A_{\epsilon}^{(n)}$$ 的序列 (如果 $$\|\mathcal{X}\|^n$$ 远大于 $$2^{nH(X)}$$)，但其总概率却趋近于0。我们主要关注典型集。
@@ -192,15 +192,15 @@ $$(X_1, Y_1), (X_2, Y_2), \dots, (X_n, Y_n)$$，每一对都服从联合分布 $
 
 ### 3. 联合典型集 (Jointly Typical Set) $$A_{\epsilon}^{(n)}(X,Y)$$ 的定义：
 一个序列对 $$(x^n, y^n) = ((x_1, \dots, x_n), (y_1, \dots, y_n))$$ 被称为是***联合 $$\epsilon$$-典型 (jointly $$\epsilon$$-typical)*** 的，如果它同时满足以下三个条件：
-1.  $$x^n$$ 序列关于其边缘分布 $$P(X)$$ 是 $$\epsilon$$"`-典型的：
+1.  $$x^n$$ 序列关于其边缘分布 $$P(X)$$ 是 $$\epsilon$$-典型的：
     > $$
     > \left| -\frac{1}{n}\log P(x^n) - H(X) \right| < \epsilon \quad \left(\text{i.e., } P(x^n) \approx 2^{-nH(X)}\right)
     > $$
-2.  $$y^n$$ 序列关于其边缘分布 $$P(Y)$$ 是 $$\epsilon$$"`-典型的：
+2.  $$y^n$$ 序列关于其边缘分布 $$P(Y)$$ 是 $$\epsilon$$-典型的：
     > $$
     > \left| -\frac{1}{n}\log P(y^n) - H(Y) \right| < \epsilon \quad \left(\text{i.e., } P(y^n) \approx 2^{-nH(Y)}\right)
     > $$
-3.  `$$(x^n, y^n)$$ 序列对关于其联合分布 $$P(X,Y)$$ 是 $$\epsilon$$"`-典型的：
+3.  $$(x^n, y^n)$$ 序列对关于其联合分布 $$P(X,Y)$$ 是 $$\epsilon$$-典型的：
     > $$
     > \left| -\frac{1}{n}\log P(x^n, y^n) - H(X,Y) \right| < \epsilon \quad \left(\text{i.e., } P(x^n, y^n) \approx 2^{-nH(X,Y)}\right)
     > $$
@@ -210,7 +210,7 @@ $$(X_1, Y_1), (X_2, Y_2), \dots, (X_n, Y_n)$$，每一对都服从联合分布 $
 ### 4. 联合典型集的性质 (对于足够大的 $$n$$)：
 1.  **高概率性：** 随机产生的序列对 $$(X^n, Y^n)$$ 属于联合典型集 $$A_{\epsilon}^{(n)}(X,Y)$$ 的概率接近于1：
 $$
-Pr((X^n, Y^n) \in A_{\epsilon}^{(n)}(X,Y)) \to 1 \quad (\text{as } n \to \infty)
+\Pr((X^n, Y^n) \in A_{\epsilon}^{(n)}(X,Y)) \to 1 \quad (\text{as } n \to \infty)
 $$
 2.  **近似等概率性：** 对于任意 $$(x^n, y^n) \in A_{\epsilon}^{(n)}(X,Y)$$，其联合概率 $$P(x^n, y^n) \approx 2^{-nH(X,Y)}$$。
 3.  **联合典型集的大小：**

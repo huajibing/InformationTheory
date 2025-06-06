@@ -100,7 +100,7 @@ $$
 n \ge m + \log_2 \left( \sum_{i=0}^{t} \binom{n}{i} \right)
 $$
 > **(板书 Part 1)**: `Sphere packing bound.`
-> **(板书 Part 1)**: `[Sum_{i=0 to t} (n choose i)] * 2^m <= 2^n` (教授写的是这个形式)
+> **(板书 Part 1)**: [Sum_{i=0 to t} (n choose i)] * 2^m <= 2^n (教授写的是这个形式)
 *   **意义**: 此界表明，为了达到一定的纠错能力和信息承载量，码长 $$n$$ 不能太短，即码率 $$R=m/n$$ 有一个上限。这是一个关于码性能极限的理论界限，但未给出构造方法。
 
 ### 2. 上界 (Upper Bound) - 存在性界
@@ -108,22 +108,22 @@ $$
 *   **目标**: 给定消息长度 $$m$$ (即 $$2^m$$ 个消息) 和一个***相对最小距离 (relative minimum distance)*** $$\delta$$ ($$0 < \delta < 1/2$$)，找到一个码长 $$n$$，使得**一定存在**一个码集 $$\{C_1, \ldots, C_{2^m}\}$$，其中每个 $$C_i \in \{0,1\}^n$$，且对所有 $$i \ne j$$，$$d_H(C_i, C_j) \ge \delta n$$。
     *   注意：$$\delta n$$ 对应于绝对最小距离 $$d_{min}$$。如果 $$d_{min} \ge 2t+1$$，则 $$\delta \ge \frac{2t+1}{n}$$。
     > **(板书 Part 2)**:
-    > `Upper bound`
-    > `Given m and δ (where $$0 < \delta < 1/2$$ originally $$t$$ )`
+    > Upper bound
+    > Given m and δ (where $$0 < \delta < 1/2$$ originally $$t$$ )
     > $$\{0,1\}^m \rightarrow \{0,1\}^n$$
-    > `Goal: Find n such that there must exist $$C_1, C_2, \ldots, C_{2^m}$$ where $$C_i \in \{0,1\}^n$$`
-    > `such that $$d_H(C_i, C_j) \ge \delta \cdot n$$ (bits) for all $$i \ne j$$.`
+    > Goal: Find n such that there must exist $$C_1, C_2, \ldots, C_{2^m}$$ where $$C_i \in \{0,1\}^n$$
+    > such that $$d_H(C_i, C_j) \ge \delta \cdot n$$ (bits) for all $$i \ne j$$.
 
 *   ***概率方法 (Probabilistic Method)***
     *   这是一种由保罗·爱多士 (Paul Erdős) 推广的非构造性证明技巧。
     *   **核心步骤**:
         1.  **随机生成码字**: (独立且均匀地) 随机选择 $$2^m$$ 个长度为 $$n$$ 的码字 $$C_1, \ldots, C_{2^m}$$ 从 $$\{0,1\}^n$$ 中。
-            > **(板书 Part 2)**: `1. (Uniformly) random generate $$C_1 \ldots C_{2^m}$$`
+            > **(板书 Part 2)**: 1. (Uniformly) random generate $$C_1 \ldots C_{2^m}$$
         2.  **估计“坏事件”概率**: 计算或估计“坏事件”发生的概率，即存在某对 $$(C_i, C_j)$$ 使得它们的汉明距离 $$d_H(C_i, C_j) < \delta n$$。
-            > **(板书 Part 2)**: `2. Estimate the prob $$P(d_H(C_i, C_j) \ge \delta n \text{ for all } i \ne j)$$`
+            > **(板书 Part 2)**: 2. Estimate the prob $$P(d_H(C_i, C_j) \ge \delta n \text{ for all } i \ne j)$$
             > (教授在Part 3中改为估计坏事件概率 $$P(\exists (i \ne j) \text{ s.t. } d_H(C_i, C_j) < \delta n)$$)
         3.  **证明存在性**: 如果这个“坏事件”的概率严格小于1，则“好事件”（所有码对都满足距离要求）的概率严格大于0，从而证明了这种码的存在性。
-            > **(板书 Part 2)**: `3. If the prob > 0, done.`
+            > **(板书 Part 2)**: 3. If the prob > 0, done.
 
     *   **引入 *Chernoff Bound (切诺夫界)***
         *   Chernoff Bound 用于估计独立同分布随机变量之和偏离其均值的尾部概率。
@@ -144,7 +144,7 @@ $$
     *   码字对的数量为 $$\binom{2^m}{2} = \frac{2^m(2^m-1)}{2} < \frac{(2^m)^2}{2} = 2^{2m-1}$$。
     *   所以，$$P_{bad} < \binom{2^m}{2} \cdot e^{-O(n)} \approx 2^{2m-1} \cdot e^{-O(n)}$$。
         > **(板书 Part 3)**: $$P(\exists (i \ne j) \text{ s.t. } d_H(C_i, C_j) < \delta n) < \sum_{i \ne j} P(d_H(C_i, C_j) < \delta n)$$
-        > **(板书 Part 3)**: `< \binom{2^m}{2} \cdot e^{-O(n)}$$ (教授口述约为 $$2^{2m} \cdot e^{-O(n)}$$)
+        > **(板书 Part 3)**: $$< \binom{2^m}{2} \cdot e^{-O(n)}$$ (教授口述约为 $$2^{2m} \cdot e^{-O(n)}$$)
 
 *   **存在性条件**:
     *   如果 $$P_{bad} < 1$$，即 $$\binom{2^m}{2} \cdot e^{-O(n)} < 1$$，则存在好码。
@@ -171,11 +171,11 @@ $$
 ### 1. 纠错码 (ECC) 的核心任务
 
 1.  **设计码字 (Design codewords)**: 使得码字间汉明距离足够大以纠错。
-    > **(板书)**: `1) Design codewords $$C_1 \ldots C_M$$ such that $$d_H(C_i, C_j)$$ is large enough (to correct err).`
+    > **(板书)**: 1) Design codewords $$C_1 \ldots C_M$$ such that $$d_H(C_i, C_j)$$ is large enough (to correct err).
 2.  **编码 (Encode)**: 将原始消息有效地映射到码字。
-    > **(板书)**: `2) Encode: message $$\rightarrow$$ codeword`
+    > **(板书)**: 2) Encode: message $$\rightarrow$$ codeword
 3.  **解码 (Decode)**: 将带噪的接收序列恢复到最可能的原始码字。
-    > **(板书)**: `3) Decode: received string $$\xrightarrow{noise}$$ codeword`
+    > **(板书)**: 3) Decode: received string $$\xrightarrow{noise}$$ codeword
 
 ### 2. 计算效率 (Computational Efficiency) 的重要性
 
@@ -208,7 +208,7 @@ $$
 *   一个 $$n$$ 比特向量 $$x = (x_1, \ldots, x_n)$$ 是一个码字，当且仅当它满足 $$H x^T = 0$$ (如果 $$x$$ 是行向量) 或 $$H c = 0$$ (如果 $$c$$ 是列向量，且 $$H$$ 的列数是 $$n$$)。从矩阵 $$H_{3 \times 7}$$ 看，向量应为 $$c \in \{0,1\}^7$$ 列向量。
 *   码集 $$C = \{ c \in \{0,1\}^7 \mid H c = 0^T \}$$ (这里 $$0^T$$ 是 $$3 \times 1$$ 的零向量)。
 *   这个集合 $$C$$ (即 $$Null(H)$$) 是一个***线性子空间 (linear subspace)***。
-    > **(板书)**: $$Null(H) = \{ x \in \{0,1\}^7 \mid H \cdot x = 0 \}$$ (教授板书用 $$x$$，并假设 $$Hx=0$$)`
+    > **(板书)**: $$Null(H) = \{ x \in \{0,1\}^7 \mid H \cdot x = 0 \}$$ (教授板书用 $$x$$，并假设 $$Hx=0$$)
 
 ### 4. 线性子空间的维度 (Dimension)
 *   对于一个 $$r \times n$$ 的校验矩阵 $$H$$，其零空间的维度为 $$k = n - rank(H)$$。
