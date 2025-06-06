@@ -97,11 +97,7 @@ $$
 
 ---
 
-**III. 香农定理可达性证明 (Achievability Proof)**
-
----
-
-**III. 香农定理可达性证明 (Achievability Proof)**
+## III. 香农定理可达性证明 (Achievability Proof)
 
 我们要证明，当速率 $$R < C$$ 时，存在编码方案使得译码错误概率 $$P_e \to 0$$。
 
