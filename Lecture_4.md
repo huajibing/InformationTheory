@@ -191,14 +191,19 @@ $$
 $$
 H(X) = -\sum_i P(X=x_i) \log_2 P(X=x_i) = -\sum_i \left( \sum_j P(X=x_i, Y=y_j) \right) \log_2 P(X=x_i)
 $$
+
 $$
 H(Y) = -\sum_j P(Y=y_j) \log_2 P(Y=y_j) = -\sum_j \left( \sum_i P(X=x_i, Y=y_j) \right) \log_2 P(Y=y_j)
 $$
+
 $$
 H(X,Y) = -\sum_{i,j} P(X=x_i, Y=y_j) \log_2 P(X=x_i, Y=y_j)
-$$$$
+$$
+
+$$
 I(X;Y) = H(X) + H(Y) - H(X,Y)
 $$
+
 $$
 = -\sum_i \sum_j P(x_i,y_j) \log_2 P(x_i) - \sum_j \sum_i P(x_i,y_j) \log_2 P(y_j) + \sum_{i,j} P(x_i,y_j) \log_2 P(x_i,y_j)
 $$
@@ -206,6 +211,7 @@ $$
 $$
 = \sum_{i,j} P(x_i,y_j) \left( \log_2 P(x_i,y_j) - \log_2 P(x_i) - \log_2 P(y_j) \right)
 $$
+
 $$
 = \sum_{i,j} P(X=x_i, Y=y_j) \log_2 \frac{P(X=x_i, Y=y_j)}{P(X=x_i)P(Y=y_j)} \quad (\text{比特})
 $$
