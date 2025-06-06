@@ -205,10 +205,10 @@ $$G_{7 \times 4} = \begin{pmatrix} I_4 \\ P_{3 \times 4} \end{pmatrix}$$ 和 $$H
     *   重量7: 1个 (全一码字，仅当 $$H\mathbf{1}^T = \mathbf{0}$$ 时存在，对于标准Hamming码是成立的)
 
     扩展后，新码字的重量将是：
-    *   原重量0 (偶) $$\rightarrow p=0 \rightarrow$$ 新重量0 (偶)
-    *   原重量3 (奇) $$\rightarrow p=1 \rightarrow$$ 新重量4 (偶)
-    *   原重量4 (偶) $$\rightarrow p=0 \rightarrow$$ 新重量4 (偶)
-    *   原重量7 (奇) $$\rightarrow p=1 \rightarrow$$ 新重量8 (偶)
+    *   原重量0 (偶) $$ \rightarrow p=0 \rightarrow $$ 新重量0 (偶)
+    *   原重量3 (奇) $$ \rightarrow p=1 \rightarrow $$ 新重量4 (偶)
+    *   原重量4 (偶) $$ \rightarrow p=0 \rightarrow $$ 新重量4 (偶)
+    *   原重量7 (奇) $$ \rightarrow p=1 \rightarrow $$ 新重量8 (偶)
     所有新码字的重量都为偶数。新码的最小非零重量是4。
     由于扩展后的码仍然是线性码（全零码字扩展后仍是全零；两个扩展码字相加，其信息部分是原码字相加，校验部分也是原校验位相加，保持偶重性），其最小距离 $$d'_{min}$$ 等于最小非零码字重量，即 $$d'_{min}=4$$。
 
