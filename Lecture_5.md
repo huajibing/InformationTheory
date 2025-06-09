@@ -77,11 +77,11 @@ $$
     Pinsker不等式给出了KL散度和总变差距离（Total Variation Distance, TVD）之间的关系。总变差距离定义为 $$TV(P,Q) = \frac{1}{2} \sum_i |P_i - Q_i| = \frac{1}{2} ||P-Q||_1$$。
     Pinsker不等式的一个常见形式为：
 $$
-TV(P,Q) \le \sqrt{\frac{1}{2 \ln 2} D_{KL}(P||Q)}
+TV(P,Q) \le \sqrt{\frac{\ln 2}{2} D_{KL}(P||Q)}
 $$
 或者等价地：
 $$
-D_{KL}(P||Q) \ge 2 \ln 2 \cdot (TV(P,Q))^2 = \frac{\ln 2}{2} ||P-Q||_1^2
+D_{KL}(P||Q) \ge \frac{2}{\ln 2} \cdot (TV(P,Q))^2 = \frac{1}{2 \ln 2} ||P-Q||_1^2
 $$
 这意味着如果KL散度很小，那么L1范数（以及总变差距离）也很小。然而，反之不一定成立，特别是当某个 $$Q_i=0$$ 而 $$P_i > 0$$ 时，KL散度为无穷大，但L1范数可能仍然有限。KL散度对分布尾部的差异或 $$Q_i \approx 0$$ 的情况更为敏感。
 
